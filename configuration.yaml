@@ -129,7 +129,7 @@ tts:
 # https://community.home-assistant.io/t/custom-component-hacs/121727
 
 hacs:
-  token: 6f8212faf4cedea02adefa7cc66461f9818944e7
+  token: !secret hacstoken
   appdaemon: true
   python_script: true
   theme: true

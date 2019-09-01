@@ -1,13 +1,32 @@
 #Service Switch
-#
-#  platform: command_line
-#  switches:
-#    remoteserial:
-#      command_on: "systemctl stop remserial.service"
-#      command_off: "systemctl start remserial.service"
-#
-#  platform: command_line
-#  switches:
-#    mosquitto:
-#      command_on: "systemctl stop mosquitto.service"
-#      command_off: "systemctl start mosquitto.service"
+
+  - platform: command_line
+    switches:
+      remoteserial:
+        command_on: "systemctl stop remserial.service"
+        command_off: "systemctl start remserial.service"
+
+  - platform: command_line
+    switches:
+      mosquitto:
+        command_on: "systemctl stop mosquitto.service"
+        command_off: "systemctl start mosquitto.service"
+
+  - platform: xiaomi_miio
+    name: Altro_Salone
+    host: XiaomiPowerStrip3.fritz.box
+    token: 540c4d43640da87bc5c9800a611bb854
+    model: zimi.powerstrip.v2
+
+
+  - platform: xiaomi_miio
+    name: Infrastruttura
+    host: XiaomiPowerStrip1.fritz.box
+    token: c63842974b4eba2ba2c051a651655896
+    model: zimi.powerstrip.v2
+
+  - platform: xiaomi_miio
+    name: Family Entertainment
+    host: XiaomiPowerStrip2.fritz.box
+    token: dcccbeb4c8f977c01264b4d11a8b4f26
+    model: zimi.powerstrip.v2
