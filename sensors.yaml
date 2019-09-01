@@ -1,0 +1,137 @@
+#
+#Creates sensors that provide information about various sun related events.
+#https://github.com/pnbruckner/ha-sun2
+
+  - platform: sun2
+    monitored_conditions:
+      - solar_midnight
+      - astronomical_dawn
+      - nautical_dawn
+      - dawn
+      - sunrise
+      - solar_noon
+      - sunset
+      - dusk
+      - nautical_dusk
+      - astronomical_dusk
+      - daylight
+      - civil_daylight
+      - nautical_daylight
+      - astronomical_daylight
+      - night
+      - civil_night
+      - nautical_night
+      - astronomical_night
+      - max_elevation
+
+#########################################
+#
+# Wunderground
+#
+##########################################
+
+  - platform: wunderground
+    api_key: wundergroundapikey
+    pws_id: IBRAC1
+    lang: IT
+    monitored_conditions:
+      - alerts
+      - dewpoint_c
+      - dewpoint_string
+      - feelslike_c
+      - feelslike_string
+      - heat_index_c
+      - heat_index_string
+      - elevation
+      - location
+      - observation_time
+      - precip_today_metric
+      - precip_today_string
+      - precip_1d_mm
+      - precip_1d
+      - pressure_mb
+      - pressure_trend
+      - relative_humidity
+      - station_id
+      - solarradiation
+      - temperature_string
+      - temp_c
+      - temp_high_record_c
+      - temp_low_record_c
+      - temp_high_avg_c
+      - temp_low_avg_c
+      - temp_high_1d_c
+      - temp_low_1d_c
+      - UV
+      - visibility_km
+      - weather
+      - weather_1d
+      - weather_1d_metric
+      - weather_1h
+      - wind_degrees
+      - wind_dir
+      - wind_gust_kph
+      - wind_gust_1d_kph
+      - wind_kph
+      - wind_1d_kph
+      - wind_string
+
+#############################################################################################################################
+#
+# mqtt 
+#
+#############################################################################################################################
+
+  - platform: mqtt
+    state_topic: "emon/emonpi/power1"
+    name: "Scambio Casa"
+    unit_of_measurement: "W"
+
+  - platform: mqtt
+    state_topic: "emon/emonpi/power2"
+    name: "Produzione Casa"
+    unit_of_measurement: "W"
+
+  - platform: mqtt
+    state_topic: "emon/emonpi/power1pluspower2"
+    name: "Consumo Casa"
+    unit_of_measurement: "W"
+
+  - platform: mqtt
+    state_topic: "emon/kitchen/ct1"
+    name: "Piastra"
+    unit_of_measurement: "W"
+
+  - platform: mqtt
+    state_topic: "emon/kitchen/ct2"
+    name: "Forno"
+    unit_of_measurement: "W"
+
+  - platform: mqtt
+    state_topic: "emon/kitchen/ct3"
+    name: "Lavastoviglie"
+    unit_of_measurement: "W"
+
+  - platform: mqtt
+    state_topic: "emon/laundry/ct1"
+    name: "Lavatrice"
+    unit_of_measurement: "W"
+
+  - platform: mqtt
+    state_topic: "emon/laundry/ct2"
+    name: "Asciugatrice"
+    unit_of_measurement: "W"
+
+##########################################
+# Command Line  
+##########################################
+
+  - platform: command_line
+    name : remoteserial
+    command : "systemctl status remserial | grep active"
+  - platform: command_line
+    name : mosquitto
+    command : "systemctl status mosquitto | grep active"
+  - platform: command_line
+    name : appdaemon
+    command : "systemctl status appdaemon | grep active"

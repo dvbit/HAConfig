@@ -1,0 +1,190 @@
+############################################################################################
+#  Groups
+############################################################################################
+
+############################################################################################
+#  Sicurezza
+############################################################################################
+
+Movimento Piano Terra:
+  name: Movimento Piano Terra 
+  view: yes
+  entities:
+    - binary_sensor.motion_sensor_158d00015d4d01
+    - binary_sensor.motion_sensor_158d000123201f
+    - binary_sensor.motion_sensor_158d00024e6ca3
+    - binary_sensor.motion_sensor_158d00024e730c
+    - binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
+    - binary_sensor.movimento_letto_giovanna_motion
+    - binary_sensor.movimento_letto_nicola_motion
+    - binary_sensor.movimento_scale_soggiorno_motion
+    - binary_sensor.motion_sensor_158d00024edfce
+
+Movimento Primo Piano:
+  name: Movimento Primo Piano 
+  view: yes
+  entities:
+    - binary_sensor.motion_sensor_158d00024e7487
+    - binary_sensor.motion_sensor_158d00024e6ca2
+    - binary_sensor.motion_sensor_158d000120cba5
+    - binary_sensor.movimento_pianerottolo_piano_motion
+
+Movimento Altro:
+  name: Movimento Altro 
+  view: yes
+  entities:
+    - binary_sensor.motion_sensor_158d000120cbde
+    - binary_sensor.motion_sensor_158d00015f049d
+
+Movimento:
+  name: Movimento  
+  view: yes
+  entities:
+    - binary_sensor.motion_sensor_158d00015d4d01
+    - binary_sensor.motion_sensor_158d000123201f
+    - binary_sensor.motion_sensor_158d00024e6ca3
+    - binary_sensor.motion_sensor_158d00024e730c
+    - binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
+    - binary_sensor.movimento_letto_giovanna_motion
+    - binary_sensor.movimento_letto_nicola_motion
+    - binary_sensor.movimento_scale_soggiorno_motion
+    - binary_sensor.motion_sensor_158d00024edfce
+    - binary_sensor.motion_sensor_158d00024e7487
+    - binary_sensor.motion_sensor_158d00024e6ca2
+    - binary_sensor.motion_sensor_158d000120cba5
+    - binary_sensor.movimento_pianerottolo_piano_motion
+    - binary_sensor.motion_sensor_158d000120cbde
+    - binary_sensor.motion_sensor_158d00015f049d
+
+Telecamere:
+  name: Telecamere
+  view: yes
+  entities:
+    - camera.telecameracitofono
+    - camera.telecameraingresso
+    - camera.telecameraportico
+    - camera.telecameracasetta
+    - camera.telecameracucina
+    - camera.telecameraletto
+    - camera.telecamerasalone
+
+Luci Esterno:
+  name: Luci Esterno
+  view: yes
+  entities:
+    - light.luce_esterno_alessandro
+    - light.luce_esterno_cancelletto
+    - light.luce_esterno_cucina
+    - light.luce_esterno_salone
+    - light.luce_esterno_taverna
+    - light.luci_cammino_ingresso
+    - light.luce_portico_ingresso
+
+Luci Esterno Notte:
+  name: Luci Esterno Notte
+  view: yes
+  entities: 
+    - light.luce_esterno_cancelletto
+    - light.luce_esterno_cucina
+    - light.luce_esterno_salone   
+
+
+Luci Cucina:
+  name: Luci Cucina
+  view: yes
+  all: true
+  entities:
+    - light.luce_cucina
+    - light.cucina
+
+Luci Camera da Letto:
+  name: Luci Camera da Letto
+  view: yes
+  all: true
+  entities:
+    - light.lampada_sale_camera_da_letto
+    - light.faretti_letto_camera_da_letto
+    - light.faretti_idromassaggio_camera_da_letto
+    - light.faretti_interno_cabina_camera_da_letto
+    - light.faretti_esterno_cabina_camera_da_letto
+    - light.led_letto
+
+Luci Soggiorno:
+  name: Luci Soggiorno
+  view: yes
+  all: true
+  entities:
+    - light.cespuglio_ingresso
+    - light.cespuglio_divano
+    - light.luce_tavolo
+    - light.tavolo
+
+Luci Cucina:
+  name: Luci Cucina
+  view: yes
+  all: true
+  entities:
+    - light.luce_cucina
+    - light.cucina
+
+Luci Esterno Notte:
+  name: Luci Esterno Notte
+  view: yes
+  all: true
+  entities: 
+    - light.luce_esterno_cancelletto
+    - light.luce_esterno_cucina
+    - light.luce_esterno_salone   
+  
+Luci Esterno Avanti:
+  name: Luci Esterno Avanti
+  view: yes
+  all: true
+  entities:
+    - light.luce_esterno_alessandro
+    - light.luce_esterno_cancelletto
+    - light.luci_cammino_ingresso
+    - light.luce_portico_ingresso
+
+Luci Esterno Retro:
+  name: Luci Esterno Retro
+  view: yes
+  all: true
+  entities:
+    - light.luce_esterno_cucina
+    - light.luce_esterno_salone
+    - light.luce_esterno_taverna
+
+Luci Giardino:
+  name: Luci Giardino
+  view: yes
+  all: true
+  entities:
+    - light.luci_giardino_lontano
+    - light.luci_giardino_vicino
+    - light.luci_cammino_ingresso
+
+Luci Giardino Dietro:
+  name: Luci Giardino Dietro
+  view: yes
+  all: true
+  entities:
+    - light.luci_giardino_lontano
+    - light.luci_giardino_vicino
+
+Luci Giardino Avanti:
+  name: Luci Giardino Avanti
+  view: yes
+  all: true
+  entities:
+    - light.luci_cammino_ingresso
+
+
+Luci Scale:
+  name: Luci Scale
+  view: yes
+  all: true
+  entities:
+    - light.pianerottolo_primo_piano
+    - light.scale_soggiorno
+

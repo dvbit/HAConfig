@@ -1,0 +1,38 @@
+title: Casa Reina
+views:
+  - title: Map
+    path: mappa
+    panel: true
+    cards:
+    - type: map
+      entities:
+        - device_tracker.420d_xdrive
+  - title: Soggiorno
+    path: soggiorno
+    cards:
+    - type: picture-elements
+      image: /local/images/PANO_Soggiorno1.jpg
+      elements:
+        - type: state-icon
+          entity: climate.soggiorno 
+          style:
+            top: 50%
+            left: 77%
+        - type: state-icon
+          tap_action:
+            action: toggle
+          entity: light.cespuglio_divano
+          style:
+            top: 35%
+            left: 62%
+        - type: icon
+          icon:   mdi:arrow-right-bold
+          tap_action:
+            action: navigate
+            navigation_path: /lovelace/mappa
+          style:
+            top: 50%
+            left: 90%        
+          
+
+            

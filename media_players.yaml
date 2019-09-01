@@ -1,0 +1,11 @@
+
+  - platform: soundtouch
+    host: SoundTouch.fritz.box
+    port: 8090
+    name: Bose Sound Touch 10
+
+  - platform: androidtv
+    name: Fire TV Alessandro
+    device_class: androidtv
+    host: firetvalessandro.fritz.box
+    adb_server_ip: reinasserver.fritz.box

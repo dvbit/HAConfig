@@ -1,0 +1,71 @@
+Ingressostill
+Ingressostream
+Ingressousername
+Ingressodahuapass
+
+Porticostill
+Porticostream
+Porticousername
+Porticodahuapass
+
+Casettastill
+Casettastream
+Casettausername
+Casettadahuapass
+
+Salonestill
+Salonestream
+Saloneusername
+Salonedahuapass
+
+Cucinastill
+Cucinastream
+Cucinausername
+Cucinadahuapass
+
+Lettostill
+Lettostream
+Lettousername
+Lettodahuapass
+
+- platform: generic
+  name: Ingresso
+  still_image_url: !secret Ingressostill
+  stream_source: !secret Ingressostream
+  username: !secret Ingressousername
+  password: !secret Ingressodahuapass
+
+- platform: generic
+  name: Portico
+  still_image_url: !secret Porticostill
+  stream_source: !secret Porticostream
+  username: !secret Porticousername
+  password: !secret Porticodahuapass
+
+- platform: generic
+  name: Casetta
+  still_image_url: !secret Casettastill
+  stream_source: !secret Casettastream
+  username: !secret Casettausername
+  password: !secret Casettadahuapass
+
+- platform: generic
+  name: Salone
+  still_image_url: !secret Salonestill
+  stream_source: !secret Salonestream
+  username: !secret Saloneusername
+  password: !secret Salonedahuapass
+
+- platform: generic
+  name: Cucina
+  still_image_url: !secret Cucinastill
+  stream_source: !secret Cucinastream
+  username: !secret Cucinausername
+  password: !secret Cucinadahuapass
+
+- platform: generic
+  name: Letto
+  still_image_url: !secret Lettostill
+  stream_source: !secret Lettostream
+  username: !secret Lettousername
+  password: !secret Lettodahuapass

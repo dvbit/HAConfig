@@ -1,0 +1,55 @@
+- platform: generic
+  name:  TelecameraCasetta
+  still_image_url: !secret TelecameraCasettastill
+  stream_source: !secret TelecameraCasettastream
+  username: !secret TelecameraCasettausername
+  password: !secret TelecameraCasettadahuapass
+
+- platform: generic
+  name:  TelecameraIngresso
+  still_image_url: !secret TelecameraIngressostill
+  stream_source: !secret TelecameraIngressostream
+  username: !secret TelecameraIngressousername
+  password: !secret TelecameraIngressodahuapass
+
+- platform: generic
+  name:  TelecameraPortico
+  still_image_url: !secret TelecameraPorticostill
+  stream_source: !secret TelecameraPorticostream
+  username: !secret TelecameraPorticousername
+  password: !secret TelecameraPorticodahuapass
+
+- platform: generic
+  name:  TelecameraSalone
+  still_image_url: !secret TelecameraSalonestill
+  stream_source: !secret TelecameraSalonestream
+  username: !secret TelecameraSaloneusername
+  password: !secret TelecameraSalonedahuapass
+
+- platform: generic
+  name:  TelecameraCucina
+  still_image_url: !secret TelecameraCucinastill
+  stream_source: !secret TelecameraCucinastream
+  username: !secret TelecameraCucinausername
+  password: !secret TelecameraCucinadahuapass
+
+- platform: generic
+  name:  TelecameraLetto
+  still_image_url: !secret TelecameraLettostill
+  stream_source: !secret TelecameraLettostream
+  username: !secret TelecameraLettousername
+  password: !secret TelecameraLettodahuapass
+
+- platform: generic
+  name:  TelecameraCitofono
+  still_image_url: !secret TelecameraCitofonostill
+  stream_source: !secret TelecameraCitofonostream
+  username: !secret TelecameraCitofonousername
+  password: !secret TelecameraCitofonodahuapass
+
+#- platform: generic
+#  name:  TelecameraMonitor
+#  still_image_url: !secret TelecameraMonitorstill
+#  stream_source: !secret TelecameraMonitorstream
+#  username: !secret TelecameraMonitorusername
+#  password: !secret TelecameraMonitordahuapass

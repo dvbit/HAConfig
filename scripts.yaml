@@ -1,0 +1,151 @@
+accendi_sky:
+  alias: Accendi Sky
+  sequence:
+  - data:
+      activity: '37753211'
+      entity_id: remote.harmony
+    service: remote.turn_on
+spegni_tv:
+  alias: Spegni Televisione Salone
+  sequence:
+  - data:
+      activity: '-1'
+      entity_id: remote.harmony
+    service: remote.turn_off
+accendi_smarttv:
+  alias: Accendi xbox
+  sequence:
+  - data:
+      activity: '37778785'
+      entity_id: remote.harmony
+    service: remote.turn_on
+metti_in_pausa:
+  alias: Metti in pausa
+  sequence:
+  - data:
+      command: pause
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+metti_in_mute:
+  alias: Metti in mute
+  sequence:
+  - data:
+      command: mute
+      device: ''
+      entity_id: remote.harmony
+    service: remote.send_command
+alza_volume:
+  alias: Alza Volume
+  sequence:
+  - data:
+      command: VolumeUp
+      device: ''
+      entity_id: remote.harmony
+      num_repeats: '5'
+    service: remote.send_command
+abbassa_volume:
+  alias: Abbassa Volume
+  sequence:
+  - data:
+      command: VolumeDown
+      device: ''
+      entity_id: remote.harmony
+      num_repeats: '5'
+    service: remote.send_command
+blu_gradualmente_salone:
+  alias: Blu Gradualmente Salone
+  sequence:
+  - data:
+      entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x15kw_switch_3
+    service: switch.turn_on
+  - data:
+      brightness: 100
+      color_name: blue
+      entity_id: light.salone
+      transition: 1
+    service: light.turn_on
+accendi_cartoni:
+  alias: Accendi_Cartoni
+  sequence:
+  - data:
+      command: Exit
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+  - data:
+      command: Exit
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+  - data:
+      device: '32437309'
+      entity_id: remote.harmony
+    service: remote.turn_on
+  - data:
+      command: '6'
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+  - data:
+      command: '0'
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+  - data:
+      command: '0'
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+vedi_cartoni:
+  alias: Vedi_Cartoni
+  sequence:
+  - data:
+      command: Exit
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+  - data:
+      command: Exit
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+  - data:
+      command: '6'
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+  - data:
+      command: '0'
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+  - data:
+      command: '0'
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+no_menu_sky:
+  alias: No Menu SKY
+  sequence:
+  - data:
+      command: Exit
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+sky_exit:
+  alias: Sky Exit
+  sequence:
+  - data:
+      command: Exit
+      device: '60325705'
+      entity_id: remote.harmony
+    service: remote.send_command
+guida_sky:
+  alias: Guida Sky
+  sequence:
+  - data:
+      command: Guide
+      device: '60325705'
+      entity_id: remote.harmony
+service: remote.send_command

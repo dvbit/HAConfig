@@ -1,0 +1,225 @@
+- id: '1566418107270'
+  alias: Bagno Camera da Letto Movimento  ON
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d00015d4d01
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_2
+    service: switch.turn_on
+- id: '1566418445609'
+  alias: Bagno Camera da Letto Movimento OFF
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d00015d4d01
+    for: '5'
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_2
+    service: switch.turn_off
+- id: '1566418588293'
+  alias: Porta Ingresso ON
+  trigger:
+  - entity_id: binary_sensor.everspring_sm103_door_window_sensor_sensor
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_3
+    service: switch.turn_on
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_4
+    service: switch.turn_on
+- id: '1566418804488'
+  alias: Porta Ingresso OFF
+  trigger:
+  - entity_id: binary_sensor.everspring_sm103_door_window_sensor_sensor
+    for: '50'
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_3
+    service: switch.turn_off
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_4
+    service: switch.turn_off
+- id: '1566471167038'
+  alias: Cabina Armadio ON
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d000123201f
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_8
+    service: switch.turn_on
+- id: '1566471257541'
+  alias: Cabina Armadio OFF
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d000123201f
+    for: '1'
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_8
+    service: switch.turn_off
+- id: '1566490518464'
+  alias: Garage Porta ON
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d00022f137b
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: light.garage
+    service: light.turn_on
+- id: '1566490641135'
+  alias: Garage Porta OFF
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d00022f137b
+    for: '5'
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.garage
+    service: light.turn_off
+- id: '1566490768871'
+  alias: Garage Movimento ON
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d00015f049d
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.garage
+    service: light.turn_on
+- id: '1566490825127'
+  alias: Garage Movimento OFF
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d00015f049d
+    for: '4'
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: light.garage
+    service: light.turn_off
+- id: '1566490988501'
+  alias: Scale Taverna ON
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d000120cbde
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.luce_scale_taverna
+    service: light.turn_on
+- id: '1566491211244'
+  alias: Cucina ON
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d00024e6ca3
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - below: '200'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d00024e6ca3
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_2
+    service: switch.turn_on
+- id: '1566491306172'
+  alias: Cucina OFF
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d00024e6ca3
+    for: '4'
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_2
+    service: switch.turn_off
+- id: '1566507832101'
+  alias: Scala Taverna OFF
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d000120cbde
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: light.luce_scale_taverna
+    service: light.turn_off
+- id: '1566509482385'
+  alias: Frigo Sempre ON
+  trigger:
+  - entity_id: switch.fibaro_system_fgwpe_f_wall_plug_gen5_switch
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgwpe_f_wall_plug_gen5_switch
+    service: switch.turn_on
+- id: '1566509660975'
+  alias: Bagno Camera da Letto Porta ON
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d0002ecf03a
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_2
+    service: switch.turn_on
+- id: 8676479df9d247669ef12e673133c8a8
+  alias: Luci Esterne ON tramonto
+  trigger:
+  - event: sunset
+    platform: sun
+  condition:
+  action:
+  - entity_id: group.Luci_Esterno_Notte
+    service: homeassistant.turn_on
+- id: 8676479ef9d247669ef12e673133c8a8
+  alias: Luci Esterne OFF alba
+  trigger:
+  - event: sunrise
+    platform: sun
+  condition:
+  action:
+  - entity_id: group.Luci_Esterno_Notte
+    service: homeassistant.turn_off

@@ -1,0 +1,306 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+config:
+
+system_health:
+
+discovery:
+
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: !secret Location
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret timezone
+
+#zones
+#https://www.home-assistant.io/components/zone/
+
+zone:
+  - name: !secret SchoolBeatrice
+    latitude: !secret SchoolBeatricelatitude
+    longitude: !secret SchoolBeatricelongitude
+    radius: 100
+    icon: mdi:chair-school
+
+  - name: !secret SchoolAlessandro
+    latitude: !secret SchoolAlessandrolatitude
+    longitude: !secret SchoolAlessandrolongitude
+    radius: 100
+    icon: mdi:chair-school
+
+  - name: !secret WifeWork
+    latitude: !secret WifeWorklatitude
+    longitude: !secret WifeWorklongitude
+    radius: 250
+    icon: mdi:work
+
+  - name: !secret Homelocation
+    latitude:  !secret Homelocationlatitude
+    longitude:  !secret Homelocationlongitude
+    radius: 100
+    icon: mdi:account-multiple
+
+  - name: !secret CasaIvanalocation
+    latitude:  !secret CasaIvanalocationlatitude
+    longitude:  !secret CasaIvanalocationlongitude
+    radius: 100
+    icon: mdi:account-multiple
+
+  - name: !secret CasaMarialocation
+    latitude:  !secret CasaMarialocationlatitude
+    longitude:  !secret CasaMarialocationlongitude
+    radius: 100
+    icon: mdi:account-multiple
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+#panels
+# https://www.home-assistant.io/components/panel_custom/
+
+panel_custom:
+  - name: zwavegraph2
+    sidebar_title: Z-Wave Graph
+    sidebar_icon: mdi:access-point-network
+    url_path: zwave
+
+#######################################################
+# lovelace : real men use CLI
+########################################################
+
+lovelace:
+  mode: yaml
+
+##############################################
+#  DataLogging
+##############################################
+
+recorder:
+  purge_keep_days: 5
+  db_url: mysql://homeassistant:toorhass@localhost/homeassistant
+
+#logging
+logger:
+  default: error
+#  logs:
+#    xiaomi_gateway: debug
+#    homeassistant.components.xiaomi_aqara: debug
+
+#influxdb:
+#  host: Reinasserver.fritz.box
+#  port: 8086
+#  database: hass
+#  username: !secret influxuser
+#  password: !secret influxdbpassword
+
+cloud:
+
+  # Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+    language: it
+
+#HACS
+# https://community.home-assistant.io/t/custom-component-hacs/121727
+
+hacs:
+  token: 6f8212faf4cedea02adefa7cc66461f9818944e7
+  appdaemon: true
+  python_script: true
+  theme: true
+
+frontend:
+  themes: !include_dir_merge_named www/themes/
+
+############################################################
+# platforms
+############################################################
+
+# Harmony 
+# https://www.home-assistant.io/components/harmony/
+
+remote:
+  - platform: harmony
+    name: Harmony
+    host: HarmonyHub.fritz.box
+
+# Xiaomi Aqara
+# https://www.home-assistant.io/components/xiaomi_aqara/
+
+xiaomi_aqara:
+  gateways:
+    - mac: 78:11:DC:B2:2B:4E
+      key: !secret AqaraKeyTaverna
+      host: XGTaverna.fritz.box
+    - mac: 34:CE:00:82:96:03
+      key: !secret AqaraKeyPianoTerra
+      host: XGPianoTerra.fritz.box
+    - mac: 7C:49:EB:19:03:79
+      key: !secret AqaraKeyPrimoPiano
+      host: XGPrimoPiano.fritz.box
+
+# Tuya
+tuya:
+  username: !secret tuyauser
+  password: !secret tuyapassword 
+  country_code: 39
+
+ambient_station:
+  api_key: YOUR_API_KEY
+  app_key: YOUR_APPLICATION_KEY
+
+#clima
+evohome:
+  username: !secret evohomeuser
+  password: !secret evohomepassword
+
+dyson:
+  username: !secret dysonusr
+  password: !secret dysonpwd
+  language: GB
+  devices:
+    - device_id: A1A-EU-MCA0437A
+      device_ip: dysonhotcoolpure.fritz.box
+
+#ifttt:
+#  key: !secret IFTTKEY
+
+#vehicles
+bmw_connected_drive:
+  name:
+    username: !secret BMWUSER
+    password: !secret BMWPWD
+    region: "rest_of_world"
+
+#home appliances
+vacuum:
+  - platform: xiaomi_miio
+    host: aspirapolvere.fritz.box
+    token: !secret VacuumKey
+
+#locks and doors
+lock:
+  - platform: nuki
+    host: AndroidService.fritz.box
+    token: !secret nukitoken
+
+cover:
+  platform: opengarage
+  covers:
+      garage:
+        host:  opengarage.fritz.box
+        device_key: !secret opengaragekey
+
+#telegram_bot:
+#  - platform: polling
+#    api_key: !secret telegram_bot_key
+#    allowed_chat_ids: !secret telegram_bot_chat_ids
+
+yeelight:
+  devices:
+    yeelink-light-strip1-ledlettoale.fritz.box:
+      name: Led Letto Alessandro
+
+alexa_media:
+  accounts:
+    - email: !secret amazonemail
+      password: !secret amazonpassword
+      url: amazon.it
+
+circadian_lighting:
+
+openuv:
+  api_key: !secret openuvkey
+  binary_sensors:
+    monitored_conditions:
+      - uv_protection_window
+  sensors:
+    monitored_conditions:
+      - current_ozone_level
+      - current_uv_index
+      - current_uv_level
+      - max_uv_index
+      - safe_exposure_time_type_1
+      - safe_exposure_time_type_2
+      - safe_exposure_time_type_3
+      - safe_exposure_time_type_4
+      - safe_exposure_time_type_5
+      - safe_exposure_time_type_6
+
+# https://github.com/DavidMStraub/homeassistant-homeconnect/blob/master/custom_components/homeconnect/switch.py
+# Bosch Siemens Home Connect
+
+#homeconnect:
+#  client_id: !secret homeconnectclientid
+#  client_secret: !secret homeconnectclientsecret
+
+
+#stream
+# https://www.home-assistant.io/components/stream/
+stream:
+
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
+#mqtt
+#https://www.home-assistant.io/components/mqtt/
+
+mqtt:
+  broker: ReinasServer.fritz.box
+  port: 1883
+  client_id: hass
+  keepalive: 60
+  discovery: true
+  discovery_prefix: homeassistant
+
+
+
+#device_tracker:
+#  - platform: unifi
+#    host: reinasserver.fritz.box
+#    username: admin
+#    password: Arturo2018!
+#    ssid_filter:
+#      - 'TheReinasUniFi'
+#    verify_ssl: False
+
+device_tracker: !include device_trackers.yaml
+group: !include groups.yaml
+light: !include lights.yaml
+switch: !include switches.yaml
+script: !include scripts.yaml
+automation: !include automations.yaml
+sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
+#intent_script: !include intent.yaml
+media_player: !include media_players.yaml
+#timer: !include timer.yaml
+camera: !include cameras.yaml
+notify: !include notify.yaml
+
+

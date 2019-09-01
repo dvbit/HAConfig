@@ -1,0 +1,66 @@
+  - platform: ping
+    host: piservice.fritz.box
+    name: PiService
+    count: 2
+    scan_interval: 30
+
+  - platform: ping
+    host: anfroidservice.fritz.box
+    name: AndroidService
+    count: 2
+    scan_interval: 30
+
+  - platform: ping
+    host: XGTaverna.fritz.box
+    name: Xiomi Gateway Taverna
+    count: 2
+    scan_interval: 30
+
+  - platform: ping
+    host: XGPianoTerra.fritz.box
+    name: Xiaomi Gateway Piano Terra
+    count: 2
+    scan_interval: 30
+
+  - platform: ping
+    host: XGPrimoPiano.fritz.box
+    name: Xiaomi Gateway Primo Piano
+    count: 2
+    scan_interval: 30
+
+  - platform: ping
+    host: HarmonyHub.fritz.box
+    name: Harmony Hub
+    count: 2
+    scan_interval: 30
+
+  - platform: ping
+    host: UnifiACLiteTaverna.fritz.box
+    name: Unifi AC Lite Taverna
+    count: 2
+    scan_interval: 30
+
+  - platform: ping
+    host: UnifiACLitePrimoPiano.fritz.box
+    name: Unifi AC Lite Primo Piano
+    count: 2
+    scan_interval: 30
+  
+  - platform: ping
+    host: UnifiACProPianoTerra.fritz.box
+    name: Unifi AC Piano Terra
+    count: 2
+    scan_interval: 30
+  
+  - platform: ping
+    host: UnifiSwitch.fritz.box
+    name: Unifi Switch
+    count: 2
+    scan_interval: 30
+
+  - platform: ping
+    host: GatewayHoneywell.fritz.box
+    name: Evohome Gateway
+    count: 2
+    scan_interval: 30
+    

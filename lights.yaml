@@ -1,0 +1,234 @@
+#######################################################################################################
+#   Lights
+#######################################################################################################
+
+#######################################################################################################
+#Xiaomi
+#######################################################################################################
+
+  - platform: xiaomi_miio
+    name: Luce Esterno Cucina
+    host: philips-light-bulb-EsternoCucina.fritz.box
+    token: abc0973e25818f37c053ef5164db668d
+    model: philips.light.bulb
+
+  - platform: xiaomi_miio
+    name: Luce Esterno Cancelletto
+    host: philips-light-bulb-EsternoCancelletto.fritz.box
+    token: 6d0b11664e170f31cb678835d7466042
+    model: philips.light.bulb
+
+  - platform: xiaomi_miio
+    name: Luce Esterno Alessandro
+    host: philips-light-bulb-EsternoAle.fritz.box
+    token: db1727db468d0b393ff7cb0855d345e4
+    model: philips.light.bulb
+
+  - platform: xiaomi_miio
+    name: Luce Esterno Salone
+    host: philips-light-bulb-EsternoSalone.fritz.box
+    token: f45889b461dfe46c310d676eb7bc02c7
+    model: philips.light.bulb
+
+  - platform: xiaomi_miio
+    name: Luce Esterno Taverna
+    host: philips-light-bulb-EsternoTaverna.fritz.box
+    token: dfca9e376e74e2005a86ba3a7c46aafe
+    model: philips.light.bulb
+
+  - platform: xiaomi_miio
+    name: Luce Scale Taverna
+    host: philips-light-bulb-ScaleTaverna.fritz.box
+    token: fe820a69ee3f7a3f1a34c32836040aec
+    model: philips.light.bulb
+
+  - platform: xiaomi_miio
+    name: Lampada Letto Alessandro
+    host: lampadalettoale.fritz.box
+    token: f74abe96fea1a0e2cda065debe3537f0
+    model: philips.light.sread1 
+
+  - platform: xiaomi_miio
+    name: Lampada Studio Taverna
+    host: yeelink-light-lamp1-lampadastudio.fritz.box
+    token: 0753c4bfc2690f687e4a55cb80b8cd07
+#    model: philips.light.lamp1
+ 
+#######################################################################################################
+#  Switch
+#######################################################################################################
+ 
+  - platform: switch
+    name: Cespuglio Divano
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_4
+
+  - platform: switch
+    name: Luce Cucina
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_2
+
+  - platform: switch
+    name: Cespuglio Ingresso
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch
+
+  - platform: switch
+    name: Luce Tavolo
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_3
+
+  - platform: switch
+    name: Faretti Letto Camera da Letto
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_5
+
+  - platform: switch
+    name: Faretti Idromassaggio Camera da Letto
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_6
+
+  - platform: switch
+    name: Faretti Esterno Cabina Camera da Letto
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_7
+
+  - platform: switch
+    name: Faretti Interno Cabina Camera da Letto
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_8
+
+  - platform: switch
+    name: Lampadario Beatrice
+    entity_id: switch.fibaro_system_unknown_type0203_id1000_switch_3
+
+  - platform: switch
+    name: Faretti Letto Alessandro
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_5
+
+  - platform: switch
+    name: Faretti Armadio Alessandro
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_6
+
+  - platform: switch
+    name: Luci Cammino Ingresso
+    entity_id: switch.fibaro_system_fgs223_double_relay_switch_4
+
+  - platform: switch
+    name: Luce Portico Ingresso
+    entity_id: switch.fibaro_system_fgs223_double_relay_switch_3
+
+  - platform: switch
+    name: Led Bagno
+    entity_id: switch.fibaro_system_fgs223_double_relay_switch_2
+
+  - platform: switch
+    name: Luci Giardino Lontano
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_9
+
+  - platform: switch
+    name: Luci Giardino Vicino
+    entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_10
+
+  - platform: switch
+    name: Lampada Sale Alessandro
+    entity_id: switch.07200341dc4f2235944b
+  
+  - platform: switch
+    name: Lampada Sale Camera da Letto
+    entity_id: switch.07200341bcddc2f88de3
+
+#######################################################################################################
+#  Light Groups
+#######################################################################################################
+
+  - platform: group
+    name: Luci Cucina
+    entities:
+      - light.luce_cucina
+      - light.cucina
+
+
+  - platform: group
+    name: Luci Soggiorno
+    entities:
+      - light.cespuglio_ingresso
+      - light.cespuglio_divano
+      - light.luce_tavolo
+      - light.tavolo
+
+  - platform: group
+    name: Luci Camera da Letto
+    entities:
+      - light.lampada_sale_camera_da_letto
+      - light.faretti_letto_camera_da_letto
+      - light.faretti_idromassaggio_camera_da_letto
+      - light.faretti_interno_cabina_camera_da_letto
+      - light.faretti_esterno_cabina_camera_da_letto
+      - light.led_letto
+
+  - platform: group
+    name: Luci Esterno
+    entities:
+      - light.luce_esterno_alessandro
+      - light.luce_esterno_cancelletto
+      - light.luce_esterno_cucina
+      - light.luce_esterno_salone
+      - light.luce_esterno_taverna
+      - light.luci_cammino_ingresso
+      - light.luce_portico_ingresso
+
+  - platform: group
+    name: Luci Esterno Avanti
+    entities:
+      - light.luce_esterno_alessandro
+      - light.luce_esterno_cancelletto
+      - light.luci_cammino_ingresso
+      - light.luce_portico_ingresso
+
+  - platform: group
+    name: Luci Esterno Retro
+    entities:
+      - light.luce_esterno_cucina
+      - light.luce_esterno_salone
+      - light.luce_esterno_taverna
+
+  - platform: group
+    name: Luci Giardino
+    entities:
+      - light.luci_giardino_lontano
+      - light.luci_giardino_vicino
+      - light.luci_cammino_ingresso
+
+  - platform: group
+    name: Luci Giardino Dietro
+    entities:
+      - light.luci_giardino_lontano
+      - light.luci_giardino_vicino
+
+  - platform: group
+    name: Luci Giardino Avanti
+    entities:
+      - light.luci_cammino_ingresso
+
+
+  - platform: group
+    name: Luci Scale
+    entities:
+      - light.pianerottolo_primo_piano
+      - light.scale_soggiorno
+
+
+# Virtual Bulb to query Home States
+# https://community.home-assistant.io/t/speech-parser-script-to-extract-entity-id-information-into-readable-form-for-alexa-or-google-assistant-tts/76428
+
+  - platform: template
+    lights:
+      alexa_state_query:
+        friendly_name: "Alexa Query Sensor"
+        turn_on:
+        turn_off:
+        set_level:
+
+# activate action inhomeassistant by wathing value os this dummy light
+# dummy light value set be Routine in Alexa
+
+  - platform: template
+    lights:
+      alexa_routine_switcher:
+        friendly_name: "Alexa Routine Switcher"
+        turn_on:
+        turn_off:
+        set_level:
