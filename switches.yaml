@@ -1,13 +1,13 @@
 #Service Switch
-
-  platform: command_line
-  switches:
-    remoteserial:
-      command_on: "systemctl stop remserial.service"
-      command_off: "systemctl start remserial.service"
-
-  platform: command_line
-  switches:
-    mosquitto:
-      command_on: "systemctl stop mosquitto.service"
-      command_off: "systemctl start mosquitto.service"
+#
+#  platform: command_line
+#  switches:
+#    remoteserial:
+#      command_on: "systemctl stop remserial.service"
+#      command_off: "systemctl start remserial.service"
+#
+#  platform: command_line
+#  switches:
+#    mosquitto:
+#      command_on: "systemctl stop mosquitto.service"
+#      command_off: "systemctl start mosquitto.service"

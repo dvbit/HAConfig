@@ -31,7 +31,7 @@
 ##########################################
 
   - platform: wunderground
-    api_key: wundergroundapikey
+    api_key: !secret wundergroundapikey
     pws_id: IBRAC1
     lang: IT
     monitored_conditions:
@@ -135,3 +135,69 @@
   - platform: command_line
     name : appdaemon
     command : "systemctl status appdaemon | grep active"
+
+#########################################
+# Harmony Status
+#########################################
+
+    TelevisioneSoggiorno:
+      value_template: '{{ states.remote.harmony.attributes.current_activity }}'
+      friendly_name: "Televisione Soggiorno"
+
+#############################################################################################################################
+#
+#  Sensori Energia
+#
+#############################################################################################################################
+
+    consumo_infrastruttura:
+      value_template: '{% if states.switch.infrastruttura.attributes["load_power"] is defined %}{{ (states.switch.infrastruttura.attributes["load_power"] | float ) | round(0)}}{% else %}-{% endif %}'
+      unit_of_measurement: 'w'
+      friendly_name: Consumo Infrastruttura
+
+    consumo_altro_salone:
+      value_template: '{% if states.switch.altro_salone.attributes["load_power"] is defined %}{{ (states.switch.altro_salone.attributes["load_power"] | float ) | round(0)}}{% else %}-{% endif %}'
+      unit_of_measurement: 'w'
+      friendly_name: Consumo Altro Salone
+
+    consumo_family_entertainment:
+      value_template: '{% if states.switch.family_entertainment.attributes["load_power"] is defined %}{{ (states.switch.family_entertainment.attributes["load_power"] | float ) | round(0)}}{% else %}-{% endif %}'
+      unit_of_measurement: 'w'
+      friendly_name: Consumo Family Entertainment
+
+#############################################################################################################################
+#
+#  OpenGarage
+#
+#############################################################################################################################
+
+    garage_status:
+      friendly_name: 'Basculante Garage'
+      value_template: '{% if states.cover.my_opengarage %}
+          {% if states.cover.my_opengarage.attributes["door_state"] == "open" %}
+            Open
+          {% elif states.cover.my_opengarage.attributes["door_state"] == "closed" %}
+            Closed
+          {% elif states.cover.my_opengarage.attributes["door_state"] == "opening" %}
+            Opening
+          {% elif states.cover.my_opengarage.attributes["door_state"] == "closing" %}
+            Closing
+          {% else %}
+            Unknown
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+    garage_car_present:
+      friendly_name: 'Auto in Garage'
+      value_template: '{% if states.cover.my_opengarage %}
+          {% if states.cover.my_opengarage.state == "open" %}
+            n/a
+          {% elif ((states.cover.my_opengarage.attributes["distance_sensor"] > 50) and (states.cover.my_opengarage.attributes["distance_sensor"] < 150)) %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'

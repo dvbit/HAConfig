@@ -118,23 +118,6 @@ Luci Soggiorno:
     - light.cespuglio_divano
     - light.luce_tavolo
     - light.tavolo
-
-Luci Cucina:
-  name: Luci Cucina
-  view: yes
-  all: true
-  entities:
-    - light.luce_cucina
-    - light.cucina
-
-Luci Esterno Notte:
-  name: Luci Esterno Notte
-  view: yes
-  all: true
-  entities: 
-    - light.luce_esterno_cancelletto
-    - light.luce_esterno_cucina
-    - light.luce_esterno_salone   
   
 Luci Esterno Avanti:
   name: Luci Esterno Avanti
