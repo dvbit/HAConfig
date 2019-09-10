@@ -45,7 +45,7 @@
   - platform: xiaomi_miio
     name: Lampada Letto Alessandro
     host: lampadalettoale.fritz.box
-    token: f74abe96fea1a0e2cda065debe3537f0
+    token: 3dae86481a8b3d6490344c40b641800a
     model: philips.light.sread1 
 
   - platform: xiaomi_miio
@@ -232,3 +232,4 @@
         turn_on:
         turn_off:
         set_level:
+        

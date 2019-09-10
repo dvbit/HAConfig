@@ -30,52 +30,44 @@
 #
 ##########################################
 
-  - platform: wunderground
+  - platform: wundergroundpws
     api_key: !secret wundergroundapikey
-    pws_id: IBRAC1
-    lang: IT
+    pws_id: IBRACC1
+    lang: it-IT
     monitored_conditions:
-      - alerts
-      - dewpoint_c
-      - dewpoint_string
-      - feelslike_c
-      - feelslike_string
-      - heat_index_c
-      - heat_index_string
-      - elevation
-      - location
-      - observation_time
-      - precip_today_metric
-      - precip_today_string
-      - precip_1d_mm
+      - stationID
+      - solarRadiation
+      - neighborhood
+      - obsTimeLocal
+      - uv
+      - winddir
+      - humidity
+      - dewpt
+      - heatIndex
+      - windChill
+      - elev
+      - precipTotal
+      - precipRate
+      - pressure
+      - temp
+      - windGust
+      - windSpeed
       - precip_1d
-      - pressure_mb
-      - pressure_trend
-      - relative_humidity
-      - station_id
-      - solarradiation
-      - temperature_string
-      - temp_c
-      - temp_high_record_c
-      - temp_low_record_c
-      - temp_high_avg_c
-      - temp_low_avg_c
-      - temp_high_1d_c
-      - temp_low_1d_c
-      - UV
-      - visibility_km
-      - weather
+      - precip_chance_1d
+      - temp_high_1d
+      - temp_low_1d
+      - wind_1d
       - weather_1d
-      - weather_1d_metric
-      - weather_1h
-      - wind_degrees
-      - wind_dir
-      - wind_gust_kph
-      - wind_gust_1d_kph
-      - wind_kph
-      - wind_1d_kph
-      - wind_string
-
+      - weather_1n
+      - weather_2d
+      - weather_2n
+      - weather_3d
+      - weather_3n
+      - weather_4d
+      - weather_4n
+      - weather_5d
+      - weather_5n
+      
 #############################################################################################################################
 #
 # mqtt 
@@ -138,35 +130,98 @@
     name : appdaemon
     command : "systemctl status appdaemon@reinan.service | grep active"
 
+  - platform: command_line
+    name : grafana
+    command : "systemctl status grafana.service | grep active"
+
+  - platform: command_line
+    name : influxdb
+    command : "systemctl status influxdb.service | grep active"
+
+  - platform: command_line
+    name : appdaemon
+    command : "systemctl status appdaemon@reinan.service | grep active"
+
+  - platform: command_line
+    name : nodered
+    command : "systemctl status nodered@reinan.service | grep active"
+
 #########################################
 # Harmony Status
 #########################################
+
   - platform: template
     sensors:
       media:
         value_template: '{{ states.remote.harmony.attributes.current_activity }}'
         friendly_name: "Televisione Soggiorno"
 
+
 #############################################################################################################################
 #
 #  Sensori Energia
 #
 #############################################################################################################################
-
       consumo_infrastruttura:
         value_template: '{% if states.switch.infrastruttura.attributes["load_power"] is defined %}{{ (states.switch.infrastruttura.attributes["load_power"] | float ) | round(0)}}{% else %}-{% endif %}'
         unit_of_measurement: 'w'
         friendly_name: Consumo Infrastruttura
-
       consumo_altro_salone:
         value_template: '{% if states.switch.altro_salone.attributes["load_power"] is defined %}{{ (states.switch.altro_salone.attributes["load_power"] | float ) | round(0)}}{% else %}-{% endif %}'
         unit_of_measurement: 'w'
         friendly_name: Consumo Altro Salone
-
       consumo_family_entertainment:
         value_template: '{% if states.switch.family_entertainment.attributes["load_power"] is defined %}{{ (states.switch.family_entertainment.attributes["load_power"] | float ) | round(0)}}{% else %}-{% endif %}'
         unit_of_measurement: 'w'
         friendly_name: Consumo Family Entertainment
+
+#########################################
+# Climate Temp Extractions
+#########################################
+      temperatura_att_casa:
+        value_template: '{{ states.climate.casa.attributes.current_temperature | float}}'
+      temperatura_att_alessandro:
+        value_template: '{{ states.climate.alessandro.attributes.current_temperature  | float}}'
+      temperatura_att_beatrice:
+        value_template: '{{ states.climate.beatrice.attributes.current_temperature  | float}}'
+      temperatura_att_gio_e_nic:
+        value_template: '{{ states.climate.gio_e_nic.attributes.current_temperature }}'
+      temperatura_att_bagno_gio_e_nic:
+        value_template: '{{ states.climate.bagno_gio_e_nic.attributes.current_temperature }}'
+      temperatura_att_soggiorno:
+        value_template: '{{ states.climate.soggiorno.attributes.current_temperature }}'
+      temperatura_att_bagno_taverna:
+        value_template: '{{ states.climate.bagno_taverna.attributes.current_temperature }}'
+      temperatura_att_bagno_su:
+        value_template: '{{ states.climate.bagno_su.attributes.current_temperature }}'
+      temperatura_att_letto_taverna:
+        value_template: '{{ states.climate.letto_taverna.attributes.current_temperature }}'
+      temperatura_att_salone_taverna:
+        value_template: '{{ states.climate.salone_taverna.attributes.current_temperature }}'
+      temperatura_att_studio:
+        value_template: '{{ states.climate.studio.attributes.current_temperature }}'
+
+#
+#      temperatura__obb_casa:
+#        value_template: '{{ states.climate.casa.attributes.status.setpointStatus.targetHeatTemperature }}'
+#      temperatura__obb_alessandro:
+#        value_template: '{{ states.climate.alessandro.attributes.status.setpointStatus.targetHeatTemperature }}'
+#      temperatura__obb_beatrice:
+#        value_template: '{{ states.climate.beatrice.attributes.status.setpointStatus.targetHeatTemperature }}'
+#      temperatura__obb_gio_e_nic:
+#        value_template: '{{ states.climate.gio_e_nic.attributes.status.setpointStatus.targetHeatTemperature }}'
+#      temperatura__obb_bagno_gio_e_nic:
+#        value_template: '{{ states.climate.bagno_gio_e_nic.attributes.status.setpointStatus.targetHeatTemperature }}'
+#      temperatura__obb_bagno_taverna:
+#        value_template: '{{ states.climate.bagno_taverna.attributes.status.setpointStatus.targetHeatTemperature }}'
+#      temperatura__obb_bagno_su:
+#        value_template: '{{ states.climate.bagno_su.attributes.status.setpointStatus.targetHeatTemperature }}'
+#      temperatura__obb_letto_taverna:
+#        value_template: '{{ states.climate.letto_taverna.attributes.status.setpointStatus.targetHeatTemperature }}'
+#      temperatura__obb_salone_taverna:
+#        value_template: '{{ states.climate.salone_taverna.attributes.status.setpointStatus.targetHeatTemperature }}'
+#      temperatura__obb_studio:
+#        value_template: '{{ states.climate.studio.attributes.status.setpointStatus.targetHeatTemperature }}'
 
 #############################################################################################################################
 #

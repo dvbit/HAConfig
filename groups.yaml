@@ -171,3 +171,42 @@ Luci Scale:
     - light.pianerottolo_primo_piano
     - light.scale_soggiorno
 
+Previsioni Giornaliere:
+  name: Previsioni Giornaliere
+  view: yes
+  entities:
+    - sensor.wupws_weather_1d
+    - sensor.wupws_weather_1n
+    - sensor.wupws_weather_2d
+    - sensor.wupws_weather_2n
+    - sensor.wupws_weather_3d
+    - sensor.wupws_weather_3n
+    - sensor.wupws_weather_4d
+    - sensor.wupws_weather_4n
+    - sensor.wupws_weather_5d
+    - sensor.wupws_weather_5n
+    - sensor.wupws_stationID
+    - sensor.wupws_solarRadiation
+    - sensor.wupws_neighborhood
+    - sensor.wupws_obsTimeLocal
+    - sensor.wupws_uv
+    - sensor.wupws_winddir
+    - sensor.wupws_humidity
+    - sensor.wupws_dewpt
+    - sensor.wupws_heatIndex
+    - sensor.wupws_windChill
+    - sensor.wupws_elev
+    - sensor.wupws_precipTotal
+    - sensor.wupws_precipRate
+    - sensor.wupws_pressure
+    - sensor.wupws_temp
+    - sensor.wupws_windGust
+    - sensor.wupws_windSpeed
+    - sensor.wupws_precip_1d
+    - sensor.wupws_precip_chance_1d
+    - sensor.wupws_temp_high_1d
+    - sensor.wupws_temp_low_1d
+    - sensor.wupws_wind_1d
+    
+
+    

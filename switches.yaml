@@ -1,16 +1,46 @@
+#########################################
 #Service Switch
+#########################################
 
   - platform: command_line
     switches:
       remoteserial:
-        command_on: "systemctl stop remserial.service"
-        command_off: "systemctl start remserial.service"
+        command_on: "sudo systemctl start remserial.service"
+        command_off: "sudo systemctl stop remserial.service"
 
   - platform: command_line
     switches:
       mosquitto:
-        command_on: "systemctl stop mosquitto.service"
-        command_off: "systemctl start mosquitto.service"
+        command_on: "sudo systemctl start mosquitto.service"
+        command_off: "sudo systemctl stop mosquitto.service"
+
+  - platform: command_line
+    switches:
+      grafana:
+        command_on: "sudo systemctl start grafana.service"
+        command_off: "sudo systemctl stop grafana.service"
+
+  - platform: command_line
+    switches:
+      influxdb:
+        command_on: "sudo systemctl start influxdb.service"
+        command_off: "sudo systemctl stop influxdb.service"
+
+  - platform: command_line
+    switches:
+      appdaemon:
+        command_on: "sudo systemctl start appdaemon.service"
+        command_off: "sudo systemctl stop appdaemon.service"
+
+  - platform: command_line
+    switches:
+      nodered:
+        command_on: "sudo systemctl start nodered.service"
+        command_off: "sudo systemctl stop nodered.service"
+
+#########################################
+#  xiaomi strips
+#########################################
 
   - platform: xiaomi_miio
     name: Altro_Salone
@@ -30,3 +60,17 @@
     host: XiaomiPowerStrip2.fritz.box
     token: dcccbeb4c8f977c01264b4d11a8b4f26
     model: zimi.powerstrip.v2
+
+#########################################
+#  Circadian Lighting
+#  https://github.com/claytonjn/hass-circadian_lighting
+#########################################
+
+  - platform: circadian_lighting
+    lights_ct:
+      - light.luce_tavolo
+      - light.tavolo
+      - light.luce_cucina
+      - light.cucina
+      - light.pianerottolo_primo_piano
+      - light.scale_soggiorno

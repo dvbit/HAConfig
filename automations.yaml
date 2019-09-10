@@ -83,19 +83,6 @@
   alias: Garage Porta ON
   trigger:
   - entity_id: binary_sensor.door_window_sensor_158d00022f137b
-    from: 'on'
-    platform: state
-    to: 'off'
-  condition: []
-  action:
-  - data:
-      entity_id: light.garage
-    service: light.turn_on
-- id: '1566490641135'
-  alias: Garage Porta OFF
-  trigger:
-  - entity_id: binary_sensor.door_window_sensor_158d00022f137b
-    for: '5'
     from: 'off'
     platform: state
     to: 'on'
@@ -103,7 +90,7 @@
   action:
   - data:
       entity_id: light.garage
-    service: light.turn_off
+    service: light.turn_on
 - id: '1566490768871'
   alias: Garage Movimento ON
   trigger:
@@ -149,7 +136,7 @@
     platform: state
     to: 'on'
   condition:
-  - below: '200'
+  - below: '150'
     condition: numeric_state
     entity_id: sensor.illumination_158d00024e6ca3
   action:
@@ -223,3 +210,46 @@
   action:
   - entity_id: group.Luci_Esterno_Notte
     service: homeassistant.turn_off
+- id: '1567793310687'
+  alias: Ingresso Dentro on
+  trigger:
+  - entity_id: binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.cespuglio_ingresso
+    service: light.turn_on
+- id: '1567793605472'
+  alias: ingresso off
+  trigger:
+  - entity_id: binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
+    for: '2'
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: light.cespuglio_ingresso
+    service: light.turn_off
+- id: '1568032161493'
+  alias: Bagno Primo Piano ON su Apertura Porta
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d000316d485
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.luce_lavabo
+    service: light.turn_on
+  - data:
+      entity_id: light.luce_doccia
+    service: light.turn_on
+  - data:
+      entity_id: light.luce_wc
+    service: light.turn_on
