@@ -63,4 +63,23 @@
     name: Evohome Gateway
     count: 2
     scan_interval: 30
-    
+
+  - platform: template
+    sensors:
+      asciugatrice:
+        friendly_name: "Asciugatrice"
+        delay_off:
+          minutes: 5
+        value_template: >-
+          {{ states('sensor.asciugatrice')|float > 15 }}
+      lavatrice:
+        friendly_name: "Lavatrice"
+        delay_off:
+          minutes: 5
+        value_template: >-
+          {{ states('sensor.lavatrice')|float > 15 }}
+          
+  - platform: workday
+    name: giornolavorativo
+    country: IT
+    province: RM

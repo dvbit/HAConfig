@@ -132,19 +132,19 @@
 
   - platform: command_line
     name : grafana
-    command : "systemctl status grafana.service | grep active"
+    command : "systemctl status grafana-server.service | grep active"
 
   - platform: command_line
-    name : influxdb
-    command : "systemctl status influxdb.service | grep active"
+    name : mariadb
+    command : "systemctl status mariadb.service | grep active"
 
   - platform: command_line
     name : appdaemon
     command : "systemctl status appdaemon@reinan.service | grep active"
 
-  - platform: command_line
-    name : nodered
-    command : "systemctl status nodered@reinan.service | grep active"
+  #- platform: command_line
+  #  name : nodered
+  #  command : "systemctl status nodered@reinan.service | grep active"
 
 #########################################
 # Harmony Status
@@ -259,3 +259,7 @@
             {% else %}
             n/a
             {% endif %}'
+
+      tavolettawc:
+         friendly_name: vibrate_sensor_action
+         value_template: '{{ states.binary_sensor.vibration_158d0002a22bc6.attributes["last_action"] }}'

@@ -38,6 +38,11 @@
         command_on: "sudo systemctl start nodered.service"
         command_off: "sudo systemctl stop nodered.service"
 
+  - platform: command_line
+    switches:
+      apricancello:
+        command_on: "curl http://admin:admin2019!@192.168.2.212/cgi-bin/accessControl.cgi?action=openDoor&channel=1&UserID=101&Type=Remote"
+        
 #########################################
 #  xiaomi strips
 #########################################

@@ -24,13 +24,19 @@
       entity_id: switch.fibaro_system_fgs223_double_relay_switch_2
     service: switch.turn_off
 - id: '1566418588293'
-  alias: Porta Ingresso ON
+  alias: Porta Ingresso ON1
   trigger:
   - entity_id: binary_sensor.everspring_sm103_door_window_sensor_sensor
     from: 'off'
     platform: state
     to: 'on'
-  condition: []
+  condition:
+  - condition: state
+    entity_id: timer.cancelletto
+    state: idle
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
   action:
   - data:
       entity_id: switch.fibaro_system_fgs223_double_relay_switch_3
@@ -38,6 +44,29 @@
   - data:
       entity_id: switch.fibaro_system_fgs223_double_relay_switch_4
     service: switch.turn_on
+  - data:
+      entity_id: timer.cancelletto
+    service: timer.start
+- id: '1566418588297'
+  alias: Porta Ingresso ON2
+  trigger:
+  - entity_id: binary_sensor.everspring_sm103_door_window_sensor_sensor
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: timer.cancelletto
+    state: active
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data:
+      entity_id: timer.cancelletto
+    service: timer.finish
+  - data: {}
+    service: rest_command.apricancello
 - id: '1566418804488'
   alias: Porta Ingresso OFF
   trigger:
@@ -117,7 +146,7 @@
       entity_id: light.garage
     service: light.turn_off
 - id: '1566490988501'
-  alias: Scale Taverna ON
+  alias: Scale Taverna da sensore scale ON
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d000120cbde
     from: 'off'
@@ -217,13 +246,16 @@
     from: 'off'
     platform: state
     to: 'on'
-  condition: []
+  condition:
+  - below: '30'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d00024e730c
   action:
   - data:
       entity_id: light.cespuglio_ingresso
     service: light.turn_on
 - id: '1567793605472'
-  alias: ingresso off
+  alias: Ingresso Dentro off
   trigger:
   - entity_id: binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
     for: '2'
@@ -252,4 +284,89 @@
     service: light.turn_on
   - data:
       entity_id: light.luce_wc
+    service: light.turn_on
+- id: '1568316012125'
+  alias: oscurante aperta
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d0002ecefcd
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.07200341bcddc2f88de3
+    service: switch.turn_on
+- id: '1568316212600'
+  alias: oscurante chiusa
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d0002ecefcd
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.07200341bcddc2f88de3
+    service: switch.turn_off
+- id: '1569954216309'
+  alias: wc
+  trigger:
+  - entity_id: binary_sensor.vibration_158d0002a22bc6
+    platform: state
+    to: tilt
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch
+    service: switch.toggle
+- id: '1570387848257'
+  alias: Bagno Doccia Camera da Letto ON
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d00015f047c
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_2
+    service: switch.turn_on
+- id: '1570387944857'
+  alias: Bagno Doccia Camera da Letto OFF
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d00015f047c
+    for: '5'
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_2
+    service: switch.turn_off
+- id: '1570388061632'
+  alias: Tavolo Salone OFF
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d00024edfce
+    for: '30'
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_3
+    service: switch.turn_off
+- id: '1570562325754'
+  alias: Scale Taverna da porta scale on
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d00030993a6
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.luce_scale_taverna
     service: light.turn_on

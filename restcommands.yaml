@@ -1,0 +1,4 @@
+  apricancello:
+    url: 'http://admin:admin2019!@192.168.2.212/cgi-bin/accessControl.cgi?action=openDoor&channel=1&UserID=101&Type=Remote'
+    method: POST
+    
