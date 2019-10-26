@@ -142,9 +142,9 @@
     name : appdaemon
     command : "systemctl status appdaemon@reinan.service | grep active"
 
-  #- platform: command_line
-  #  name : nodered
-  #  command : "systemctl status nodered@reinan.service | grep active"
+  - platform: command_line
+    name : nodered
+    command : "systemctl status nodered | grep active"
 
 #########################################
 # Harmony Status

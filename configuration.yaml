@@ -65,7 +65,7 @@ zone:
 http:
   api_password: !secret hasspass
   base_url: https://thereinas.it
-#  ssl_certificate: /etc/letsencrypt/live/thereinas.it/fullchain.pem
+  #  ssl_certificate: /etc/letsencrypt/live/thereinas.it/fullchain.pem
 #  ssl_key: /etc/letsencrypt/live/thereinas.it/privkey.pem
 
 #panels
@@ -368,15 +368,33 @@ amcrest:
       - motion_detection
       - motion_recording
 
-  - host: TelecameraCitofono.fritz.box
-    name:  TelecameraCitofono
-    username: !secret TelecameraCitofonousername
-    password: !secret TelecameraCitofonodahuapass
+#  - host: TelecameraCitofono.fritz.box
+#    name:  TelecameraCitofono
+#    username: !secret TelecameraCitofonousername
+#    password: !secret TelecameraCitofonodahuapass
+#
+#  - host:  TelecameraMonitor.fritz.box
+#    name:  TelecameraMonitor
+#    username: !secret TelecameraMonitorusername
+#    password: !secret TelecameraMonitordahuapass
+#
 
-  - host:  TelecameraMonitor.fritz.box
-    name:  TelecameraMonitor
-    username: !secret TelecameraMonitorusername
-    password: !secret TelecameraMonitordahuapass
+fritzbox_tools:
+  host: "192.168.2.1"  # required
+  username: !secret FritzUser
+  password: !secret FritzPassword
+  profile_on: "Standard"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
+  profile_off: "Bloccato"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
+#  profile_60min: "limitato60minuti"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
+#  profile_30min: "limitato30minuti"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
+#  profile_15min: "limitato15minuti"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
+  device_list: # Optional. If you don't want to expose a profile switch for just some of your network devices
+    - "TabletAle"
+    - "TelefonoAle"
+    - "FireTvAle"
+
+
+
 
 device_tracker: !include device_trackers.yaml
 group: !include groups.yaml

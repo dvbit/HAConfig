@@ -40,17 +40,16 @@
 #  username: !secret TelecameraLettousername
 #  password: !secret TelecameraLettodahuapass
 #
-#- platform: generic
-#  name:  TelecameraCitofono
-#  still_image_url: !secret TelecameraCitofonostill
-#  stream_source: !secret TelecameraCitofonostream
-#  username: !secret TelecameraCitofonousername
-#  password: !secret TelecameraCitofonodahuapass
-#
-#- platform: generic
-#  name:  TelecameraMonitor
-#  still_image_url: !secret TelecameraMonitorstill
-#  stream_source: !secret TelecameraMonitorstream
-#  username: !secret TelecameraMonitorusername
-#  password: !secret TelecameraMonitordahuapass
-#
+- platform: generic
+  name:  TelecameraCitofono
+  still_image_url: !secret TelecameraCitofonostill
+  stream_source: !secret TelecameraCitofonostream
+  username: !secret TelecameraCitofonousername
+  password: !secret TelecameraCitofonodahuapass
+
+- platform: generic
+  name:  TelecameraMonitor
+  still_image_url: !secret TelecameraMonitorstill
+  stream_source: !secret TelecameraMonitorstream
+  username: !secret TelecameraMonitorusername
+  password: !secret TelecameraMonitordahuapass

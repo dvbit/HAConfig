@@ -1,9 +1,15 @@
-  - platform: unifi
-    host: piservice.fritz.box
-    username: admin
-    password: Arturo2018!
-    ssid_filter:
-      - 'TheReinasUniFi'
-    verify_ssl: False
+#  - platform: unifi
+#    host: piservice.fritz.box
+#    username: admin
+#    password: Arturo2018!
+#    ssid_filter:
+#      - 'TheReinasUniFi'
+#    verify_ssl: False
 
   - platform: fritz
+
+  - platform: life360
+    accounts:
+    - username: !secret LIFE360_USERNAME
+      password: !secret LIFE360_PASSWORD
+

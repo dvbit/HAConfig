@@ -32,9 +32,6 @@
     to: 'on'
   condition:
   - condition: state
-    entity_id: timer.cancelletto
-    state: idle
-  - condition: state
     entity_id: sun.sun
     state: below_horizon
   action:
@@ -44,9 +41,6 @@
   - data:
       entity_id: switch.fibaro_system_fgs223_double_relay_switch_4
     service: switch.turn_on
-  - data:
-      entity_id: timer.cancelletto
-    service: timer.start
 - id: '1566418588297'
   alias: Porta Ingresso ON2
   trigger:
@@ -58,15 +52,14 @@
   - condition: state
     entity_id: timer.cancelletto
     state: active
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
   action:
+  - service: rest_command.apricancello
+  - data:
+      entity_id: switch.fibaro_system_fgs221_double_relay_switch_2x1_5kw_switch_3
+    service: switch.turn_on
   - data:
       entity_id: timer.cancelletto
     service: timer.finish
-  - data: {}
-    service: rest_command.apricancello
 - id: '1566418804488'
   alias: Porta Ingresso OFF
   trigger:
@@ -247,7 +240,7 @@
     platform: state
     to: 'on'
   condition:
-  - below: '30'
+  - below: '25'
     condition: numeric_state
     entity_id: sensor.illumination_158d00024e730c
   action:
@@ -361,7 +354,7 @@
 - id: '1570562325754'
   alias: Scale Taverna da porta scale on
   trigger:
-  - entity_id: binary_sensor.door_window_sensor_158d00030993a6
+  - entity_id: binary_sensor.door_window_sensor_158d000126aaab
     from: 'off'
     platform: state
     to: 'on'
@@ -370,3 +363,38 @@
   - data:
       entity_id: light.luce_scale_taverna
     service: light.turn_on
+- id: '1570801078800'
+  alias: Luci Portico On su Movimento
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.telecameraingresso_motion_detected
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data:
+      entity_id: switch.fibaro_system_fgs223_double_relay_switch_3
+    service: switch.turn_on
+  - data:
+      entity_id: light.cespuglio_ingresso
+    service: light.turn_on
+- id: '1570801244558'
+  alias: Luci Portico Off su Movimento
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.telecameraingresso_motion_detected
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data:
+      entity_id: light.cespuglio_ingresso
+    service: light.turn_off
