@@ -76,7 +76,7 @@ resources:
     type: js
   - url: /community_plugin/state-element/state-element.js
     type: js
-  - url: /community_plugin/surveillance-card/surveillance-card.js
+  - url: /community_plugin/surveillance-card/surveillance-card.js?v=0
     type: module
   - url: /community_plugin/swipe-card/swipe-card.js
     type: module
@@ -90,77 +90,65 @@ resources:
     type: module
   - url: /community_plugin/compact-custom-header/compact-custom-header.js
     type: module
+  - url: /community_plugin/timer-card/timer-card.js
+    type: module
+  - url: /community_plugin/lovelace-layout-card/layout-card.js
+    type: module
+  - url: /community_plugin/homekit-panel-card.js
+    type: module
+  - url: /community_plugin/custom-light-popup-card.js
+    type: module
+  - url: /community_plugin/button-entity-row/button-entity-row.js
+    type: module
 views:
   - title: Lightz
     name: Lightz
     path: Lightz
     panel: true
     cards:
-      - type: vertical-stack
+      - type: custom:layout-card
+        layout: horizontal
+        min_columns: 1
+        max_columns: 6
+        column_width: 200px
         cards:
-        - type: horizontal-stack
-          cards:
-            - type: "custom:button-card"
-              entity: light.luci_soggiorno
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.cespuglio_ingresso
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.cespuglio_divano
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.luce_tavolo
-              color_type: card
-#            - type: "custom:button-card"
-#              color_type: blank-card
-#            - type: "custom:button-card"
-#              color_type: blank-card
-        - type: horizontal-stack
-          cards:
-            - type: "custom:button-card"
-              entity: light.cucina_2
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.luce_cucina
-              color_type: card
-#            - type: "custom:button-card"
-#              color_type: blank-card
-#            - type: "custom:button-card"
-#              color_type: blank-card
-#            - type: "custom:button-card"
-#              color_type: blank-card
-        - type: horizontal-stack
-          cards:
-            - type: "custom:button-card"
-              entity: light.luci_camera_da_letto
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.led_letto
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.faretti_letto_camera_da_letto
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.faretti_idromassaggio_camera_da_letto
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.faretti_esterno_cabina_camera_da_letto
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.lampada_sale_camera_da_letto
-              color_type: card
-            - type: "custom:button-card"
-              entity: light.faretti_interno_cabina_camera_da_letto
-              color_type: card
-        - type: horizontal-stack
-          cards:
-            - type: "custom:button-card"
-              entity: light.led_bagno
-              color_type: card
-            - type: "custom:button-card"
-              icon: mdi:fan
-              entity: switch.fibaro_system_fgs223_double_relay_switch
+          - type: "custom:button-card"
+            entity: light.soggiorno
+
+          - type: "custom:button-card"
+            entity: light.cespuglio_ingresso
+            icon: mdi:lamp
+          - type: "custom:button-card"
+            icon: mdi:lamp
+            entity: light.cespuglio_divano
+          - type: "custom:button-card"
+            entity: light.tavolo
+            icon: mdi:table-chair
+            color: auto
+          - break
+          - type: "custom:button-card"
+            entity: light.luci_camera_da_letto
+          - type: "custom:button-card"
+            entity: light.faretti_esterno_cabina_camera_da_letto
+          - type: "custom:button-card"
+            entity: light.faretti_idromassaggio_camera_da_letto
+          - type: "custom:button-card"
+            entity: light.faretti_interno_cabina_camera_da_letto
+          - type: "custom:button-card"
+            entity: light.faretti_letto_camera_da_letto
+          - break
+          - type: "custom:button-card"
+            entity: light.luci_esterno
+          - type: "custom:button-card"
+            entity: light.luci_esterno_avanti
+          - type: "custom:button-card"
+            entity: light.luci_esterno_retro
+          - type: "custom:button-card"
+            entity: light.luci_giardino_avanti
+          - type: "custom:button-card"
+            entity: light.luci_giardino_dietro
+          
+
   - title: energy
     name: Energy
     path: energy
@@ -280,10 +268,27 @@ views:
           hours_to_show: 2
           points_per_hour: 6 
           hour24: true
-          lower_bound: 5
-          upper_bound: 30
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
           entities:
-            - entity: sensor.temperatura_att_gio_e_nic
+            - entity: sensor.temperatura_att_soggiorno
         - type: "custom:mini-graph-card"
           name: Clima Soggiorno 12 ore
           unit: o
@@ -291,53 +296,607 @@ views:
           hours_to_show: 12
           points_per_hour: 6 
           hour24: true
-          lower_bound: 5
-          upper_bound: 30
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
+          entities:
+            - entity: sensor.temperatura_att_soggiorno
+        - type: thermostat
+          entity: climate.soggiorno
+      - type: horizontal-stack
+        cards:
+        - type: "custom:mini-graph-card"
+          name: Clima Camera da Letto ultime 2 ore
+          unit: o
+          icon: mdi:home-thermometer
+          hours_to_show: 2
+          points_per_hour: 6 
+          hour24: true
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
           entities:
             - entity: sensor.temperatura_att_gio_e_nic
-            
-        - type: "custom:simple-thermostat"
+        - type: "custom:mini-graph-card"
+          name: Clima Camera da Letto 12 ore
+          unit: o
+          icon: mdi:home-thermometer
+          hours_to_show: 12
+          points_per_hour: 6 
+          hour24: true
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
+          entities:
+            - entity: sensor.temperatura_att_gio_e_nic
+        - type: thermostat
           entity: climate.gio_e_nic
+      - type: horizontal-stack
+        cards:
+        - type: "custom:mini-graph-card"
+          name: Clima Camera Alessandro ultime 2 ore
+          unit: o
+          icon: mdi:home-thermometer
+          hours_to_show: 2
+          points_per_hour: 6 
+          hour24: true
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
+          entities:
+            - entity: sensor.temperatura_att_alessandro
+        - type: "custom:mini-graph-card"
+          name: Clima Camera Alessandro 12 ore
+          unit: o
+          icon: mdi:home-thermometer
+          hours_to_show: 12
+          points_per_hour: 6 
+          hour24: true
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
+          entities:
+            - entity: sensor.temperatura_att_alessandro
+        - type: thermostat
+          entity: climate.alessandro
+      - type: horizontal-stack
+        cards:
+        - type: "custom:mini-graph-card"
+          name: Clima Camera Beatrice ultime 2 ore
+          unit: o
+          icon: mdi:home-thermometer
+          hours_to_show: 2
+          points_per_hour: 6 
+          hour24: true
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
+          entities:
+            - entity: sensor.temperatura_att_beatrice
+        - type: "custom:mini-graph-card"
+          name: Clima Camera Beatrice 12 ore
+          unit: o
+          icon: mdi:home-thermometer
+          hours_to_show: 12
+          points_per_hour: 6 
+          hour24: true
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
+          entities:
+            - entity: sensor.temperatura_att_beatrice
+        - type: thermostat
+          entity: climate.beatrice
+      - type: horizontal-stack
+        cards:
+        - type: "custom:mini-graph-card"
+          name: Clima Bagno Primo Piano ultime 2 ore
+          unit: o
+          icon: mdi:home-thermometer
+          hours_to_show: 2
+          points_per_hour: 6 
+          hour24: true
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
+          entities:
+            - entity: sensor.temperatura_att_bagno_su
+        - type: "custom:mini-graph-card"
+          name: Clima Bagno Primo Piano 12 ore
+          unit: o
+          icon: mdi:home-thermometer
+          hours_to_show: 12
+          points_per_hour: 6 
+          hour24: true
+          color_thresholds:
+            - value: 19
+              color: "#0000FF"
+            - value: 20
+              color: "#000080"
+            - value: 21
+              color: "#8000FF"
+            - value: 22
+              color: "#FF00FF"
+            - value: 23
+              color: "#FF0000"
+            - value: 24
+              color: "#FF0000"
+            - value: 25
+              color: "#FF0000"
+            - value: 26
+              color: "#FF0000"
+            - value: 27
+              color: "#FF0000"
+          entities:
+            - entity: sensor.temperatura_att_bagno_su
+        - type: thermostat
+          entity: climate.bagno_su
+  - title: Telecamere 
+    name: Telecamere
+    path: telecamere
+    panel: true
+    cards:
+        - type: vertical-stack
+          cards:
+            - type: horizontal-stack
+              cards:
+              - type: picture-entity
+                entity: camera.telecameraingresso
+                camera_view: live
+              - type: picture-entity
+                entity: camera.telecameraportico
+                camera_view: live
+              - type: picture-entity
+                entity: camera.telecameracasetta
+                camera_view: live
+            - type: horizontal-stack
+              cards:
+              - type: picture-entity
+                entity: camera.telecameracitofono
+                camera_view: live
+              - type: picture-entity
+                entity: camera.telecamerasalone
+                camera_view: live
+              - type: picture-entity
+                entity: camera.telecameracucina
+                camera_view: live
 
-  #          - entity: sensor.temperatura_att_gio_e_nic
-  #          - entity: sensor.temperatura_att_bagno_gio_e_nic
-#      - type  : thermostat
-#        entity: climate.casa
-#      - type: thermostat
-#        entity: climate.casa
-#      - type: thermostat
-#        entity: climate.soggiorno
-#      - type: thermostat
-#        entity: climate.gio_e_nic
-#      - type: thermostat
-#        entity: climate.bagno_gio_nic
-#      - type: "custom:mini-graph-card"
-#        name: Clima Primo Piano
-#        unit: o
-#        icon: mdi:home-thermometer
-#        hours_to_show: 24
-#        points_per_hour: 6 
-#        hour24: true
-#        lower_bound: 5
-#        upper_bound: 30
-#        entities:
-#          - entity: sensor.temperatura_att_casa
-#          - entity: sensor.temperatura_att_beatrice
-#          - entity: sensor.temperatura_att_alessandro
-#          - entity: sensor.temperatura_att_bagno_su
-#      - type: "custom:mini-graph-card"
-#        name: Clima Taverna
-#        unit: o
-#        icon: mdi:home-thermometer
-#        hours_to_show: 24
-#        points_per_hour: 6 
-#        hour24: true
-#        lower_bound: 5
-#        upper_bound: 30
-#        entities:
-#          - entity: sensor.temperatura_att_casa
-#          - entity: sensor.temperatura_att_bagno_taverna
-#          - entity: sensor.temperatura_att_letto_taverna
-#          - entity: sensor.temperatura_att_salone_taverna
-#          - entity: sensor.temperatura_att_studio
-#
+  - title: Surv 
+    name: Surv
+    path: Surv
+    panel: true
+    cards:
+      - type: custom:surveillance-card
+        thumb_interval: 15
+        update_interval: 2
+        cameras:
+          - entity: camera.telecameracitofono
+          - entity: camera.telecameramonitor
+          - entity: camera.telecameraingresso
+            motion_entity: binary_sensor.telecameraingresso_motion_detected
+          - entity: camera.telecameracasetta
+            motion_entity: binary_sensor.telecameracasetta_motion_detected
+          - entity: camera.telecameraportico
+            motion_entity: binary_sensor.telecameracasetta_motion_detected
+          - entity: camera.telecamerasalone
+            motion_entity: binary_sensor.telecamerasalone_motion_detected
+          - entity: camera.telecameracucina
+            motion_entity: binary_sensor.telecameracucina_motion_detected
+          - entity: camera.telecameraletto
+            motion_entity: binary_sensor.telecameraletto_motion_detected
+
+  - title: Centro Notifiche
+    path: centro_notifiche
+    #icon: mdi:account-tie
+    cards:
+      - type: entities # CARD PRINCIPALE
+        style: |
+          ha-card {
+            borde-radius: var(--ha-card-border-radius); 
+            border: solid var(--primary-color); border-width: 0px 1px 1px 1px;
+          }
+          .card-content {
+            padding: 0;
+          }
+        entities:
+          - type: custom:hui-markdown-card # TESTATINA PRINCIPALE
+            style: |
+              ha-card {
+                border-radius: var(--ha-card-border-radius) var(--ha-card-border-radius) 0px 0px; 
+                #background: var(--primary-color);
+                #background: content-box radial-gradient(var(--paper-item-icon-active-color), var(--primary-color));
+                background: content-box radial-gradient(var(--light-primary-color), var(--primary-color));
+                box-shadow: none;
+              }
+            content: >-
+              <font size=5><center>Centro Notifiche</font>
+          - type: custom:button-entity-row
+            buttons:
+              - entity: binary_sensor.people_home
+                # state_icons:
+                #   "off": "mdi:home-export-outline"
+                #   "on": "mdi:home-import-outline"
+              - entity: group.location_tracker
+                state_icons:
+                  "not_home": "mdi:home-export-outline"
+                  "home": "mdi:home-import-outline"
+                state_styles:
+                  "not_home":
+                    color: red
+                    font-weight: bold
+                  "home":
+                    color: var(--paper-item-icon-active-color)
+              - entity: input_boolean.speech_notifications
+                state_icons:
+                  "off" : "mdi:voice-off"
+              - entity: input_boolean.text_notifications
+                state_icons:
+                  "off": "mdi:cellphone-message-off"
+              - entity: input_boolean.screen_notifications
+                state_icons:
+                  "off": "mdi:message-bulleted-off"
+                  #"on": "mdi:message-bulleted"
+              - entity: input_boolean.guest_mode
+                state_icons:
+                  "on": "mdi:account-multiple-plus"
+                  "off": "mdi:account-multiple-minus-outline"
+              - entity: input_boolean.priority_message
+                state_icons:
+                  "off": "mdi:alarm-light-outline"
+              - entity: input_boolean.holidays
+              - entity: binary_sensor.dnd
+                state_icons:
+                  "on": "mdi:do-not-disturb"
+                  "off": "mdi:do-not-disturb-off"
+              - entity: input_boolean.last_message
+          - type: divider
+            style:
+              background-color: var(--primary-color)
+              height: 1px
+          - type: custom:hui-glance-card
+            style: |
+              ha-card {
+                overflow: hidden; box-shadow: none; background: none; border-radius: 0px; font-size: 0.9em;
+              }
+            columns: 3
+            show_icon: false
+            entities:
+              - entity: sensor.period_of_day
+              - entity: sensor.period_of_day_volume
+              - entity: input_number.default_restore_volume
+              - entity: input_select.notification_media_player_alexa
+                tap_action:
+                  action: call-service
+                  service: input_select.select_next
+                  service_data: 
+                    entity_id: input_select.notification_media_player_alexa
+                hold_action:
+                  action: call-service
+                  service: input_select.select_previous
+                  service_data: 
+                    entity_id: input_select.notification_media_player_alexa
+                double_tap_action:
+                  action: more-info
+              - entity:  input_select.notification_media_player_google
+                tap_action:
+                  action: call-service
+                  service: input_select.select_next
+                  service_data: 
+                    entity_id: input_select.notification_media_player_google
+                hold_action:
+                  action: call-service
+                  service: input_select.select_previous
+                  service_data: 
+                    entity_id: input_select.notification_media_player_google
+                double_tap_action:
+                  action: more-info
+              - entity:  input_select.default_notify
+                tap_action:
+                  action: call-service
+                  service: input_select.select_next
+                  service_data: 
+                    entity_id: input_select.default_notify
+                hold_action:
+                  action: call-service
+                  service: input_select.select_previous
+                  service_data: 
+                    entity_id: input_select.default_notify
+                double_tap_action:
+                  action: more-info
+          # - type: divider
+          #   style:
+          #     background-color: var(--primary-color)
+          #     height: 1px
+          - type: custom:button-entity-row
+            buttons:
+              - entity: input_boolean.ariela_switch
+                name: Ariela
+              - entity: input_boolean.google_switch
+                name: Google
+              - entity: input_boolean.tts_google_mode
+                state_icons:
+                  "on": "mdi:google-assistant"
+              - entity: input_boolean.alexa_switch
+                name: Alexa
+              - entity: input_select.default_alexa_type
+                state_icons:
+                  "TTS": "mdi:text-shadow"
+                state_styles:
+                  "TTS":
+                    color: var(--paper-item-icon-active-color)
+                  "Announce":
+                    color: green
+                service: input_select.select_next
+                service_data:
+                  entity_id: input_select.default_alexa_type
+          - type: custom:hui-entities-card
+            style: |
+              ha-card {
+                background:none; border-radius: 0px; box-shadow: none; 
+              }
+              .card-content {
+                padding-top: 0; margin-top: 0; padding-bottom: 0; margin-bottom: 0;
+              }
+            entities:
+              - type: custom:text-input-row
+                entity: input_text.intercom_message_hub
+
+      # CARD 99 Gruppo Automazioni
+      - type: entities
+        title: Automazioni
+        show_header_toggle: false
+        entities:
+          - type: custom:fold-entity-row
+            head: group.automations_notification_hub
+
+      # CARD 01 Centro Notifiche
+      - type: entities
+        title: Centro Notifiche
+        show_header_toggle: false
+        entities:
+          - type: section
+            label: Monitor
+          - group.location_tracker
+          - type: custom:fold-entity-row
+            head: sensor.period_of_day
+            entities:
+              - input_datetime.start_morning
+              - input_datetime.start_afternoon
+              - input_datetime.start_evening
+              - input_datetime.start_night
+          - type: custom:fold-entity-row
+            head: sensor.period_of_day_volume
+            entities:
+              - input_number.morning_volume
+              - input_number.afternoon_volume
+              - input_number.evening_volume
+              - input_number.night_volume
+              - input_number.default_restore_volume
+          - entity: binary_sensor.dnd
+            tap_action:
+              action: call-service
+              service: input_boolean.toggle
+              service_data:
+                entity_id: input_boolean.speech_notifications
+          - type: call-service
+            name: Ultimo Messaggio
+            action_name: Ascolta
+            service: input_boolean.turn_on
+            service_data:
+              entity_id: input_boolean.last_message
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: Modalità
+            entities:
+              - entity: input_boolean.holidays
+              - entity: input_boolean.guest_mode
+              - entity: input_boolean.priority_message
+              - entity: input_boolean.speech_notifications
+              - entity: input_boolean.text_notifications
+              - entity: input_boolean.screen_notifications
+              - entity: input_boolean.last_message
+          - type: section
+            label: Interfono
+          - entity: automation.send_intercom_message_hub
+            name: Off/On
+          - entity: input_number.intercom_message_volume
+          - entity: input_text.intercom_message_hub
+
+      # CARD 02 Impostazioni Assistente
+      - type: entities
+        title: Impostazioni Assistente
+        show_header_toggle: false
+        entities:
+          - entity: input_text.personal_assistant_name
+          - entity: input_select.default_notify
+          - entity: input_number.tts_wait_time
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: FERIALI - Orario modo silenzioso
+            entities:
+              - entity: input_datetime.dnd_start_weekdays
+              - entity: input_datetime.dnd_end_weekdays
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: FESTIVI - Orario modo silenzioso
+            entities:
+              - entity: input_datetime.dnd_start_holidays
+              - entity: input_datetime.dnd_end_holidays
+          - type: custom:fold-entity-row
+            head:
+              type: section
+              label: VOLUME di default durante il griorno
+            entities:
+              - input_datetime.start_morning
+              - input_number.morning_volume
+              - input_datetime.start_afternoon
+              - input_number.afternoon_volume
+              - input_datetime.start_evening
+              - input_number.evening_volume
+              - input_datetime.start_night
+              - input_number.night_volume
+              - input_number.default_restore_volume
+
+      # CARD 03 Google
+      - type: entities
+        title: Google
+        show_header_toggle: false
+        entities:
+          - type: section
+            label: ''
+          - entity: input_boolean.google_switch
+          - entity: input_boolean.tts_google_mode
+          - entity: input_select.language
+          - entity: input_select.notification_media_player_google
+
+      # CARD 04 Alexa
+      - type: entities
+        title: Alexa
+        show_header_toggle: false
+        entities:
+          - type: section
+            label: ''
+          - entity: input_boolean.alexa_switch
+          - entity: input_select.notification_media_player_alexa
+          - entity: input_select.default_alexa_type
+          - entity: input_select.default_alexa_method
+
+      # CARD 05 Ariela
+      - type: entities
+        title: Ariela
+        show_header_toggle: false
+        entities:
+          - type: section
+            label: ''
+          - entity: input_boolean.ariela_switch

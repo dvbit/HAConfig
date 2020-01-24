@@ -186,8 +186,8 @@
         value_template: '{{ states.climate.beatrice.attributes.current_temperature  | float}}'
       temperatura_att_gio_e_nic:
         value_template: '{{ states.climate.gio_e_nic.attributes.current_temperature }}'
-      temperatura_att_bagno_gio_e_nic:
-        value_template: '{{ states.climate.bagno_gio_e_nic.attributes.current_temperature }}'
+#      temperatura_att_bagno_gio_e_nic:
+#        value_template: '{{ states.climate.bagno_gio_e_nic.attributes.current_temperature }}'
       temperatura_att_soggiorno:
         value_template: '{{ states.climate.soggiorno.attributes.current_temperature }}'
       temperatura_att_bagno_taverna:
@@ -201,27 +201,27 @@
       temperatura_att_studio:
         value_template: '{{ states.climate.studio.attributes.current_temperature }}'
 
-#
-#      temperatura__obb_casa:
-#        value_template: '{{ states.climate.casa.attributes.status.setpointStatus.targetHeatTemperature }}'
-#      temperatura__obb_alessandro:
-#        value_template: '{{ states.climate.alessandro.attributes.status.setpointStatus.targetHeatTemperature }}'
-#      temperatura__obb_beatrice:
-#        value_template: '{{ states.climate.beatrice.attributes.status.setpointStatus.targetHeatTemperature }}'
-#      temperatura__obb_gio_e_nic:
-#        value_template: '{{ states.climate.gio_e_nic.attributes.status.setpointStatus.targetHeatTemperature }}'
-#      temperatura__obb_bagno_gio_e_nic:
-#        value_template: '{{ states.climate.bagno_gio_e_nic.attributes.status.setpointStatus.targetHeatTemperature }}'
-#      temperatura__obb_bagno_taverna:
-#        value_template: '{{ states.climate.bagno_taverna.attributes.status.setpointStatus.targetHeatTemperature }}'
-#      temperatura__obb_bagno_su:
-#        value_template: '{{ states.climate.bagno_su.attributes.status.setpointStatus.targetHeatTemperature }}'
-#      temperatura__obb_letto_taverna:
-#        value_template: '{{ states.climate.letto_taverna.attributes.status.setpointStatus.targetHeatTemperature }}'
-#      temperatura__obb_salone_taverna:
-#        value_template: '{{ states.climate.salone_taverna.attributes.status.setpointStatus.targetHeatTemperature }}'
-#      temperatura__obb_studio:
-#        value_template: '{{ states.climate.studio.attributes.status.setpointStatus.targetHeatTemperature }}'
+
+ #     temperatura__obb_casa:
+ #       value_template: '{{ states.climate.casa.attributes.status.setpoint_status.target_heat_temperature}}'
+ #     temperatura__obb_alessandro:
+ #       value_template: '{{ states.climate.alessandro..attributes.status.setpoint_status.target_heat_temperature}}'
+ #     temperatura__obb_beatrice:
+ #       value_template: '{{ states.climate.beatrice.attributes.status.setpoint_status.target_heat_temperature }}'
+ #     temperatura__obb_gio_e_nic:
+ #       value_template: '{{ states.climate.gio_e_nic.attributes.status.setpoint_status.target_heat_temperature }}'
+##      temperatura__obb_bagno_gio_e_nic:
+##        value_template: '{{ states.climate.bagno_gio_e_nic.attributes.status.setpoint_status.target_heat_temperature }}'
+ #     temperatura__obb_bagno_taverna:
+ #       value_template: '{{ states.climate.bagno_taverna.attributes.status.setpoint_status.target_heat_temperature }}'
+ #     temperatura__obb_bagno_su:
+ #       value_template: '{{ states.climate.bagno_su.attributes.status.setpoint_status.target_heat_temperature }}'
+ #     temperatura__obb_letto_taverna:
+ #       value_template: '{{ states.climate.letto_taverna.attributes.status.setpoint_status.target_heat_temperature }}'
+ #     temperatura__obb_salone_taverna:
+ #       value_template: '{{ states.climate.salone_taverna.attributes.status.setpoint_status.target_heat_temperature }}'
+ #     temperatura__obb_studio:
+ #       value_template: '{{ states.climate.studio.attributes.status.setpoint_status.target_heat_temperature }}'
 
 #############################################################################################################################
 #
@@ -260,6 +260,44 @@
             n/a
             {% endif %}'
 
-      tavolettawc:
-         friendly_name: vibrate_sensor_action
-         value_template: '{{ states.binary_sensor.vibration_158d0002a22bc6.attributes["last_action"] }}'
+#      tavolettawc:
+#         friendly_name: vibrate_sensor_action
+#         value_template: '{{ states.binary_sensor.vibration_158d0002a22bc6.attributes["last_action"] }}'
+
+  - platform: attributes
+    friendly_name: "Last changed"
+    attribute: last_triggered
+    icon: 'mdi:clock'
+    time_format: '%e %B - %H:%M:%S'
+    entities:
+      - binary_sensor.movimento_letto_giovanna_motion
+      - binary_sensor.movimento_letto_nicola_motion
+
+  - platform: feedparser
+    name: Engineering Feed
+    feed_url: 'https://www.sciencedaily.com/rss/matter_energy/engineering.xml'
+    date_format: '%a, %b %d %I:%M %p'
+    inclusions:
+     - title
+     - link
+     - description
+     - image
+     - language
+     - pubDate
+    exclusions:
+     - language
+
+  - platform: attributes
+    friendly_name: "Batteries"
+    attribute: battery
+    unit_of_measurement: "%"
+    entities:
+      - sensor.humidity_158d00016d0abc
+      - sensor.humidity_158d00016d0aed
+      - sensor.illumination_158d00024e6ca2
+      - sensor.illumination_158d00024e6ca3
+      - sensor.illumination_158d00024e7487
+      - sensor.illumination_7811dcb22b4e
+      - sensor.movimento_bagno_piano_light_level
+
+     

@@ -44,12 +44,29 @@
   name:  TelecameraCitofono
   still_image_url: !secret TelecameraCitofonostill
   stream_source: !secret TelecameraCitofonostream
+  authentication: digest
   username: !secret TelecameraCitofonousername
   password: !secret TelecameraCitofonodahuapass
 
-- platform: generic
-  name:  TelecameraMonitor
-  still_image_url: !secret TelecameraMonitorstill
-  stream_source: !secret TelecameraMonitorstream
-  username: !secret TelecameraMonitorusername
-  password: !secret TelecameraMonitordahuapass
+#- platform: generic
+#  name:  TelecameraMonitor
+#  still_image_url: !secret TelecameraMonitorstill
+#  stream_source: !secret TelecameraMonitorstream
+#  username: !secret TelecameraMonitorusername
+#  password: !secret TelecameraMonitordahuapass
+
+- platform: local_file
+  file_path: "/home/reinan/.homeassistant/www/images/portico/Sicurezza Portico_latest_person.jpg"
+  name: Ultima Persona Portico
+
+- platform: local_file
+  file_path: "/home/reinan/.homeassistant/www/images/ingresso/Sicurezza Ingresso_latest_person.jpg"
+  name: Ultima Persona Ingresso
+
+- platform: local_file
+  file_path: "/home/reinan/.homeassistant/www/images/casetta/Sicurezza Casetta_latest_person.jpg"
+  name: Ultima Persona casetta
+
+- platform: local_file
+  file_path: "/home/reinan/.homeassistant/www/images/citofono/Sicurezza Citofono_latest_person.jpg"
+  name: Ultima Persona Citofono

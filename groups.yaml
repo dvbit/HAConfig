@@ -61,6 +61,7 @@ Telecamere:
   view: yes
   entities:
     - camera.telecameracitofono
+    - camera.telecameramonitor
     - camera.telecameraingresso
     - camera.telecameraportico
     - camera.telecameracasetta

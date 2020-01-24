@@ -1,0 +1,18 @@
+'1579886801000':
+  alias: Invia Foto Ultima Persona Ingresso
+  sequence:
+  - data:
+      caption: 'Attenzione : Persona Lato Ingresso'
+      disable_notification: true
+      file: /home/reinan/.homeassistant/www/images/ingresso/Sicurezza Ingresso_latest_person.jpg
+      target: '485476558'
+    service: telegram_bot.send_photo
+'1579886930482':
+  alias: Invia Foto Ultima Persona Casetta
+  sequence:
+  - data:
+      caption: 'Attenzione : Persona Lato Giardino'
+      disable_notification: true
+      file: /home/reinan/.homeassistant/www/images/casetta/Sicurezza Casetta_latest_person.jpg
+      target: '485476558'
+    service: telegram_bot.send_photo

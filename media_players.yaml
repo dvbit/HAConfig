@@ -11,6 +11,14 @@
     adb_server_ip: reinasserver.fritz.box
 
   - platform: spotify
-    client_id: 95143bb6df5840bdab617fdf908ac9f0
-    client_secret: 046cad3de4bc4976a8afb4007c3241ad
+    client_id: !secret spotifyclient_id
+    client_secret: !secret spotifyclient_secret  
+  - platform:  skyq
+    name: SkyQ
+    host: skyq.fritz.box
+    sources:
+        SkyOne: '1,0,6'
+        SkyNews: '5,0,1'
+    config_directory: '/home/reinan/.homeassistant/'
+    generate_switches_for_channels: true
         

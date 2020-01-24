@@ -1,0 +1,25 @@
+- id: '1574527242803'
+  name: tet
+  entities:
+    automation.bagno_doccia_camera_da_letto_on:
+      state: 'on'
+    media_player.echo_dot_alessandro:
+      is_volume_muted: false
+      media_content_type: standby
+      source: Local Speaker
+      state: standby
+    switch.echo_dot_alessandro_do_not_disturb_switch:
+      state: 'off'
+    switch.echo_dot_alessandro_repeat_switch:
+      state: unavailable
+    switch.echo_dot_alessandro_shuffle_switch:
+      state: unavailable
+    switch.fibaro_system_fgs223_double_relay_switch:
+      state: 'off'
+- id: '1574527302026'
+  name: test
+  entities:
+    automation.bagno_primo_piano_on_su_apertura_porta:
+      state: 'on'
+    switch.fibaro_system_fgs223_double_relay_switch:
+      state: 'on'

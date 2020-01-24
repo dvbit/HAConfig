@@ -83,3 +83,23 @@
     name: giornolavorativo
     country: IT
     province: RM
+
+  - platform: dpc
+    latitude: !secret Homelocationlatitude
+    longitude: !secret Homelocationlongitude
+    name: DPCRoma
+    istat: '058013'
+    alert: 'gialla'
+    warnings:
+      - temporali_oggi
+      - idraulico_oggi
+      - idrogeologico_oggi
+      - temporali_domani
+      - idraulico_domani
+      - idrogeologico_domani
+
+  - platform: ffmpeg_motion
+    input: camera.TelecameraCitofono
+
+  - platform: car_wash
+    weather: weather.wundergroundpws

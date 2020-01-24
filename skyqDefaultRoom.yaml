@@ -1,0 +1,56 @@
+    skyq_pausedefaultroom:
+      value_template: '{{"off"}}'
+      friendly_name: 'pause in the Default Room'
+      turn_on:
+        service: media_player.media_pause
+        data:
+          entity_id: media_player.skyq
+      turn_off:
+        service: script.placeholder
+    skyq_playdefaultroom:
+      value_template: '{{"off"}}'
+      friendly_name: 'play in the Default Room'
+      turn_on:
+        service: media_player.media_play
+        data:
+          entity_id: media_player.skyq
+      turn_off:
+        service: script.placeholder
+    skyq_ffdefaultroom:
+      value_template: '{{"off"}}'
+      friendly_name: 'fastforward in the Default Room'
+      turn_on:
+        service: media_player.media_next_track
+        data:
+          entity_id: media_player.skyq
+      turn_off:
+        service: script.placeholder
+    skyq_rwdefaultroom:
+      value_template: '{{"off"}}'
+      friendly_name: 'rewind in the Default Room'
+      turn_on:
+        service: media_player.media_previous_track
+        data:
+          entity_id: media_player.skyq
+      turn_off:
+        service: script.placeholder
+    skyq_skyonedefaultroom:
+      value_template: '{{"off"}}'
+      friendly_name: 'SkyOne in the Default Room'
+      turn_on:
+        service: media_player.select_source
+        data:
+          entity_id: media_player.skyq
+          source: 'SkyOne'
+      turn_off:
+        service: script.placeholder
+    skyq_skynewsdefaultroom:
+      value_template: '{{"off"}}'
+      friendly_name: 'SkyNews in the Default Room'
+      turn_on:
+        service: media_player.select_source
+        data:
+          entity_id: media_player.skyq
+          source: 'SkyNews'
+      turn_off:
+        service: script.placeholder

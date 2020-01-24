@@ -1,10 +1,12 @@
+default_config:
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
-config:
 
 system_health:
 
 discovery:
+
+mobile_app: 
 
 homeassistant:
   # Name of the location where Home Assistant is running
@@ -19,6 +21,17 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret timezone
 
+  packages: !include_dir_named packages
+
+  whitelist_external_dirs:
+    - /home/reinan/.homeassistant/www/
+    - /home/reinan/.homeassistant/www/images/
+    - /home/reinan/.homeassistant/www/images/portico/
+    - /home/reinan/.homeassistant/www/images/ingresso/
+    - /home/reinan/.homeassistant/www/images/citofono/
+    - /home/reinan/.homeassistant/www/images/casetta/
+    - /mnt/data2/video/
+    - /tmp
 #zones
 #https://www.home-assistant.io/components/zone/
 
@@ -63,14 +76,23 @@ zone:
 # http:
 #   base_url: example.duckdns.org:8123
 http:
-  api_password: !secret hasspass
-  base_url: https://thereinas.it
-  #  ssl_certificate: /etc/letsencrypt/live/thereinas.it/fullchain.pem
+#  api_password: !secret hasspass
+  base_url: https://thereinas.it:443
+#  ssl_certificate: /etc/letsencrypt/live/thereinas.it/fullchain.pem
 #  ssl_key: /etc/letsencrypt/live/thereinas.it/privkey.pem
 
 #panels
 # https://www.home-assistant.io/components/panel_custom/
 
+panel_iframe:
+  mdiindex:
+    title: MDI Icon Index
+    icon: mdi:vector-square
+    url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
+  dockerstatus:
+    title: Docker Status
+    icon: mdi:docker
+    url: http://192.168.2.2:9900/#/containers
 panel_custom:
   - name: zwavegraph2
     sidebar_title: Z-Wave Graph
@@ -100,8 +122,8 @@ logger:
 #    homeassistant.components.xiaomi_aqara: debug
 
 influxdb:
-  host: Reinasserver.fritz.box
-  port: 8086
+  host: !secret influxserver 
+  port: !secret influxport
   database: hass
 #  username: !secret influxuser
 #  password: !secret influxdbpassword
@@ -152,7 +174,7 @@ frontend:
 remote:
   - platform: harmony
     name: Harmony
-    host: HarmonyHub.fritz.box
+    host: Harmonyhub.fritz.box
 
 # Xiaomi Aqara
 # https://www.home-assistant.io/components/xiaomi_aqara/
@@ -187,7 +209,7 @@ evohome:
 dyson:
   username: !secret dysonusr
   password: !secret dysonpwd
-  language: GB
+  language: IT
   devices:
     - device_id: A1A-EU-MCA0437A
       device_ip: dysonhotcoolpure.fritz.box
@@ -196,11 +218,11 @@ dyson:
 #  key: !secret IFTTKEY
 
 #vehicles
-#bmw_connected_drive:
-#  name:
-#    username: !secret BMWUSER
-#    password: !secret BMWPWD
-#    region: "rest_of_world"
+bmw_connected_drive:
+  name:
+    username: !secret BMWUSER
+    password: !secret BMWPWD
+    region: "rest_of_world"
 
 #home appliances
 vacuum:
@@ -221,10 +243,11 @@ cover:
         host:  opengarage.fritz.box
         device_key: !secret opengaragekey
 
-#telegram_bot:
-#  - platform: polling
-#    api_key: !secret telegram_bot_key
-#    allowed_chat_ids: !secret telegram_bot_chat_ids
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_key
+    allowed_chat_ids: 
+      - !secret telegram_bot_chat_id
 
 yeelight:
   devices:
@@ -260,6 +283,8 @@ openuv:
 hass_opensprinkler:
   host: opensprinkler.fritz.box
   password: !secret opensprinklerpassword
+
+  
 # https://github.com/DavidMStraub/homeassistant-homeconnect/blob/master/custom_components/homeconnect/switch.py
 # Bosch Siemens Home Connect
 
@@ -279,80 +304,58 @@ ffmpeg:
 #https://www.home-assistant.io/components/mqtt/
 
 mqtt:
-  broker: ReinasServer.fritz.box
-  port: 1883
+  broker: !secret mqttserver
+  port: !secret mqttport
   client_id: hass
   keepalive: 60
   discovery: true
   discovery_prefix: homeassistant
-
-
-#device_tracker:
-#  - platform: unifi
-#    host: reinasserver.fritz.box
-#    username: admin
-#    password: Arturo2018!
-#    ssid_filter:
-#      - 'TheReinasUniFi'
-#    verify_ssl: False
 
 amcrest:
   - host:   TelecameraIngresso.fritz.box
     name:  TelecameraIngresso
     username: !secret TelecameraIngressousername
     password: !secret TelecameraIngressodahuapass
-    binary_sensors: 
-      - motion_detected
-      - online
-    sensors:
-      - motion_detector
-    switches: 
-      - motion_detection
-      - motion_recording    
+    binary_sensors:
+     - motion_detected
+     - online
       
   - host:   TelecameraCasetta.fritz.box
     name:  TelecameraCasetta
     username: !secret TelecameraCasettausername
     password: !secret TelecameraCasettadahuapass
-    binary_sensors: 
-      - motion_detected
-      - online
-    sensors:
-      - motion_detector
-    switches: 
-      - motion_detection
-      - motion_recording    
+    binary_sensors:
+     - motion_detected
+     - online
 
   - host:   TelecameraPortico.fritz.box
     name:  TelecameraPortico
     username: !secret TelecameraPorticousername
     password: !secret TelecameraPorticodahuapass
+    binary_sensors:
+     - motion_detected
+     - online
     
   - host:   TelecameraCucina.fritz.box
     name:  TelecameraCucina
     username: !secret TelecameraCucinausername
     password: !secret TelecameraCucinadahuapass
-    binary_sensors: 
-      - motion_detected
-      - online
-    sensors:
-      - motion_detector
-    switches: 
-      - motion_detection
-      - motion_recording
-  
+    binary_sensors:
+     - motion_detected
+     - online
+
   - host:   TelecameraSalone.fritz.box
     name:  TelecameraSalone
     username: !secret TelecameraSaloneusername
     password: !secret TelecameraSalonedahuapass
     binary_sensors: 
-      - motion_detected
-      - online
-    sensors:
-      - motion_detector
-    switches: 
-      - motion_detection
-      - motion_recording
+     - motion_detected
+     - online
+##   sensors:
+##     - motion_detector
+##   switches: 
+  #    - motion_detection
+  #    - motion_recording
 
   
   - host:   TelecameraLetto.fritz.box
@@ -360,42 +363,145 @@ amcrest:
     username: !secret TelecameraLettousername
     password: !secret TelecameraLettodahuapass
     binary_sensors: 
-      - motion_detected
-      - online
-    sensors:
-      - motion_detector
-    switches: 
-      - motion_detection
-      - motion_recording
+     - motion_detected
+     - online
+##   sensors:
+##     - motion_detector
+#  switches: 
+#    - motion_detection
+#    - motion_recording
 
-#  - host: TelecameraCitofono.fritz.box
-#    name:  TelecameraCitofono
-#    username: !secret TelecameraCitofonousername
-#    password: !secret TelecameraCitofonodahuapass
-#
-#  - host:  TelecameraMonitor.fritz.box
-#    name:  TelecameraMonitor
-#    username: !secret TelecameraMonitorusername
-#    password: !secret TelecameraMonitordahuapass
-#
 
 fritzbox_tools:
   host: "192.168.2.1"  # required
   username: !secret FritzUser
   password: !secret FritzPassword
-  profile_on: "Standard"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
+  profile_on: "Illimitato"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
   profile_off: "Bloccato"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
 #  profile_60min: "limitato60minuti"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
 #  profile_30min: "limitato30minuti"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
 #  profile_15min: "limitato15minuti"  # Optional. Needed if you want to switch between device profiles ("Zugangsprofile")
-  device_list: # Optional. If you don't want to expose a profile switch for just some of your network devices
+  devices: # Optional. If you don't want to expose a profile switch for just some of your network devices
     - "TabletAle"
     - "TelefonoAle"
     - "FireTvAle"
 
 
+anniversaries:
+  sensors:
+  - name: Compleanno Giovanna
+    date: '1969-07-03'
+  - name: Shakespeare's Wedding Anniversary
+    date: '1582-11-27'      
 
+image_processing:
+  - platform: deepstack_face
+    ip_address: localhost
+    port: 5500
+    api_key: !secret deepstackkey
+    timeout: 5
+    detect_only: False
+    scan_interval: 30
+    source:
+      - entity_id: camera.telecamerasalone
+        name: Visi Salone
 
+  - platform: deepstack_face
+    ip_address: localhost
+    port: 5500
+    api_key: !secret deepstackkey
+    timeout: 5
+    detect_only: False
+    scan_interval: 60
+    source:
+      - entity_id: camera.telecameracucina
+        name: Visi Cucina
+
+  - platform: deepstack_face
+    ip_address: localhost
+    port: 5500
+    timeout: 5
+    detect_only: False
+    scan_interval: 60
+    source:
+      - entity_id: camera.telecameracitofono
+        name: Visi Citofono
+
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5500
+    scan_interval: 60 # Optional, in seconds
+    save_file_folder: /home/reinan/.homeassistant/www/images/casetta/
+    save_timestamped_file: True
+    source:
+      - entity_id: camera.telecameracasetta
+        name: Sicurezza Casetta
+
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5500
+    scan_interval: 10 # Optional, in seconds
+    save_file_folder: /home/reinan/.homeassistant/www/images/portico/
+    save_timestamped_file: True
+    source:
+      - entity_id: camera.telecameraportico
+        name: Sicurezza Portico
+
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5500
+    scan_interval: 10 # Optional, in seconds
+    save_file_folder: /home/reinan/.homeassistant/www/images/ingresso/
+    save_timestamped_file: True
+    source:
+      - entity_id: camera.telecameraingresso
+        name: Sicurezza Ingresso
+
+  - platform: deepstack_object
+    ip_address: localhost
+    port: 5500
+    scan_interval: 30 # Optional, in seconds
+    save_file_folder: /home/reinan/.homeassistant/www/images/citofono/
+    save_timestamped_file: True
+    source:
+      - entity_id: camera.telecameracitofono
+        name: Sicurezza Citofono
+
+ifttt:
+  key: !secret iftttwebhookkey
+
+twilio:
+  account_sid: !secret trilliosid
+  auth_token: !secret trilliotoken
+
+breaking_changes:
+
+glances:
+  - host: !secret glancesserver
+
+#image_processing:
+# - platform: dlib_face_identify
+#   source:
+#    - entity_id: camera.telecameracucina
+#    - entity_id: camera.telecameracitofono
+#    - entity_id: camera.telecameracasetta
+#    - entity_id: camera.telecameraingresso
+#    - entity_id: camera.telecameraportico
+#    - entity_id: camera.telecameraletto
+#    - entity_id: camera.telecameramonitor
+#    - entity_id: camera.telecamerasalone
+#   faces:
+#     Giovanna: /home/reinan/.homeassistant/www/images/Giovanna.jpg
+#     Nicola: /home/reinan/.homeassistant/www/images/Nicola.jpg
+#     Beatrice: /home/reinan/.homeassistant/www/images/Beatrice.jpg
+#     Alessandro: /home/reinan/.homeassistant/www/images/Alessandro.jpg    
+#  - platform: facebox
+#    ip_address: reinasserver.fritz.box
+#    port: 8180
+#    source:
+#      - entity_id: camera.telecameracucina
+#        name: Camera Cucina
+        
 device_tracker: !include device_trackers.yaml
 group: !include groups.yaml
 light: !include lights.yaml
@@ -410,4 +516,5 @@ timer: !include timers.yaml
 camera: !include cameras.yaml
 notify: !include notify.yaml
 rest_command: !include restcommands.yaml
+
 
