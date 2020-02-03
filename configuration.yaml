@@ -77,22 +77,28 @@ zone:
 #   base_url: example.duckdns.org:8123
 http:
 #  api_password: !secret hasspass
-  base_url: https://thereinas.it:443
+  base_url: https://thereinas.it
 #  ssl_certificate: /etc/letsencrypt/live/thereinas.it/fullchain.pem
 #  ssl_key: /etc/letsencrypt/live/thereinas.it/privkey.pem
 
 #panels
 # https://www.home-assistant.io/components/panel_custom/
 
+api:
+
 panel_iframe:
-  mdiindex:
-    title: MDI Icon Index
-    icon: mdi:vector-square
-    url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
+#  mdiindex:
+#    title: MDI Icon Index
+#    icon: mdi:vector-square
+#    url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
   dockerstatus:
     title: Docker Status
     icon: mdi:docker
     url: http://192.168.2.2:9900/#/containers
+  combivox:
+    title: Combivox
+    icon: mdi:alarm
+    url: http://combivox.fritz.box
 panel_custom:
   - name: zwavegraph2
     sidebar_title: Z-Wave Graph
@@ -162,7 +168,7 @@ hacs:
   theme: true
 
 frontend:
-  themes: !include_dir_merge_named www/themes/
+  themes: !include_dir_merge_named /home/reinan/.homeassistant/themes/
 
 ############################################################
 # platforms
@@ -196,6 +202,7 @@ tuya:
   username: !secret tuyauser
   password: !secret tuyapassword 
   country_code: 39
+
 
 ambient_station:
   api_key: YOUR_API_KEY
@@ -401,7 +408,7 @@ image_processing:
     api_key: !secret deepstackkey
     timeout: 5
     detect_only: False
-    scan_interval: 30
+    scan_interval: 3600
     source:
       - entity_id: camera.telecamerasalone
         name: Visi Salone
@@ -412,7 +419,7 @@ image_processing:
     api_key: !secret deepstackkey
     timeout: 5
     detect_only: False
-    scan_interval: 60
+    scan_interval: 3600
     source:
       - entity_id: camera.telecameracucina
         name: Visi Cucina
@@ -422,15 +429,15 @@ image_processing:
     port: 5500
     timeout: 5
     detect_only: False
-    scan_interval: 60
+    scan_interval: 3600
     source:
-      - entity_id: camera.telecameracitofono
+      - entity_id: camera.ultima_persona_citofono
         name: Visi Citofono
 
   - platform: deepstack_object
     ip_address: localhost
     port: 5500
-    scan_interval: 60 # Optional, in seconds
+    scan_interval: 3600 # Optional, in seconds
     save_file_folder: /home/reinan/.homeassistant/www/images/casetta/
     save_timestamped_file: True
     source:
@@ -440,7 +447,7 @@ image_processing:
   - platform: deepstack_object
     ip_address: localhost
     port: 5500
-    scan_interval: 10 # Optional, in seconds
+    scan_interval: 3600 # Optional, in seconds
     save_file_folder: /home/reinan/.homeassistant/www/images/portico/
     save_timestamped_file: True
     source:
@@ -450,7 +457,7 @@ image_processing:
   - platform: deepstack_object
     ip_address: localhost
     port: 5500
-    scan_interval: 10 # Optional, in seconds
+    scan_interval: 3600 # Optional, in seconds
     save_file_folder: /home/reinan/.homeassistant/www/images/ingresso/
     save_timestamped_file: True
     source:
@@ -460,7 +467,7 @@ image_processing:
   - platform: deepstack_object
     ip_address: localhost
     port: 5500
-    scan_interval: 30 # Optional, in seconds
+    scan_interval: 3600 # Optional, in seconds
     save_file_folder: /home/reinan/.homeassistant/www/images/citofono/
     save_timestamped_file: True
     source:
@@ -516,5 +523,5 @@ timer: !include timers.yaml
 camera: !include cameras.yaml
 notify: !include notify.yaml
 rest_command: !include restcommands.yaml
-
+input_datetime: !include input_datetime.yaml
 

@@ -110,8 +110,9 @@
     to: 'on'
   condition: []
   action:
-  - data:
-      entity_id: light.garage
+  - entity_id: light.luce_porta_garage
+    service: light.turn_on
+  - entity_id: light.garage
     service: light.turn_on
 - id: '1566490768871'
   alias: Garage Movimento ON
@@ -139,13 +140,9 @@
       entity_id: light.garage
     service: light.turn_off
 - id: '1566490988501'
-  alias: Scale Taverna da sensore scale ON
+  alias: Scale Taverna Su da sensore scale ON
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d000120cbde
-    from: 'off'
-    platform: state
-    to: 'on'
-  - entity_id: binary_sensor.motion_sensor_158d00024e7487
     from: 'off'
     platform: state
     to: 'on'
@@ -153,6 +150,18 @@
   action:
   - data:
       entity_id: light.luce_scale_taverna
+    service: light.turn_on
+- id: '1566490938551'
+  alias: Scale Taverna Giu da sensore scale ON
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d000120cba5
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.luce_porta_garage
     service: light.turn_on
 - id: '1566491211244'
   alias: Cucina ON
@@ -195,6 +204,9 @@
     to: 'off'
   condition: []
   action:
+  - data:
+      entity_id: light.luce_porta_garage
+    service: light.turn_off
   - data:
       entity_id: light.luce_scale_taverna
     service: light.turn_off
@@ -455,3 +467,159 @@
       data:
         type: announce
       message: Messaggio di prova
+- id: b9d6acb47a1c4fdca4b4e3536d98198f
+  alias: Richiesta Foto Telecamere Esterne
+  trigger:
+  - event_data:
+      command: /Telecamere
+    event_type: telegram_command
+    platform: event
+  action:
+  - service: script.inviafotocasetta
+  - service: script.inviafotoingresso
+  - service: script.inviafotoportico
+  hide_entity: true
+  initial_state: 'on'
+- alias: Light theme dopo Alba
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+  - service: frontend.set_theme
+    data:
+      name: Google Light Theme
+  id: 94eef53f5f2840538f0ddfac546f37d2
+- alias: Dark theme dopo Tramonto
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+  - service: frontend.set_theme
+    data:
+      name: Google Dark Theme
+  id: 638de72829b54907bb19ed38a40fc835
+- alias: Light theme dopo  reboot di giorno
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  action:
+    service: frontend.set_theme
+    data:
+      name: Google Light Theme
+  id: 5153c629d4624a48aa4e45bbf2abf89e
+- alias: Dark theme dopo reboot di notte
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+    service: frontend.set_theme
+    data:
+      name: Google Dark Theme
+  id: a9c60a5bdbdc4c9ba06c10594173d60b
+- id: '7272827999653'
+  alias: Avviso Fine Lavatrice
+  initial_state: 'on'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.lavatrice
+    from: ‘on’
+    to: ‘off’
+    for:
+      seconds: 30
+  action:
+  - service: notify.alexa_media
+    data:
+      target:
+      - media_player.echo_dot_camera_da_letto
+      - media_player.echo_show_cucina
+      - media_player.echo_plus_salone
+      title: Lavatrice
+      data:
+        type: announce
+      message: Il programma della lavatrice si è concluso
+- id: '7272333999653'
+  alias: Avviso Fine Asciugatrice
+  initial_state: 'on'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.asciugatrice
+    from: ‘on’
+    to: ‘off’
+    for:
+      seconds: 30
+  action:
+  - service: notify.alexa_media
+    data:
+      target:
+      - media_player.echo_dot_camera_da_letto
+      - media_player.echo_show_cucina
+      - media_player.echo_plus_salone
+      title: Asciugatrice
+      data:
+        type: announce
+      message: Il programma dell'asciugatrice si è concluso
+- id: '1232333999653'
+  alias: Scan su Movimento Ingresso
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.telecameraingresso_motion_detected
+    to: 'on'
+  action:
+  - service: image_processing.scan
+    data:
+      entity_id: image_processing.sicurezza_ingresso
+- id: '123432999653'
+  alias: Scan su Movimento Casetta
+  trigger:
+  - entity_id: binary_sensor.telecameracasetta_motion_detected
+    from: 'off'
+    platform: state
+    to: 'on'
+  action:
+  - data:
+      entity_id: image_processing.sicurezza_casetta
+    service: image_processing.scan
+- id: '123458439653'
+  alias: Identificata Persona
+  trigger:
+    platform: event
+    event_type: image_processing.object_detected
+    event_data:
+      object: person
+  action:
+  - service: script.inviafotoultimapersonaingresso
+  - service: script.inviafotoultimapersonacasetta
+- id: '1580674887449'
+  alias: Accendi Luci su Movimento Ingresso
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.telecameraingresso_motion_detected
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - service: script.accendilucicamminoingresso
+- id: '1580680910548'
+  alias: Scatta Foto su Movimento Ingresso
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.telecameraingresso_motion_detected
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: script.scattafotoingresso
+  - service: script.inviafotoingresso

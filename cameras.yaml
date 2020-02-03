@@ -69,4 +69,4 @@
 
 - platform: local_file
   file_path: "/home/reinan/.homeassistant/www/images/citofono/Sicurezza Citofono_latest_person.jpg"
-  name: Ultima Persona Citofono
+  name: Ultima Vista Citofono

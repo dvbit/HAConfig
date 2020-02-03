@@ -41,7 +41,7 @@
   - platform: command_line
     switches:
       apricancello:
-        command_on: "curl http://admin:admin2019!@192.168.2.212/cgi-bin/accessControl.cgi?action=openDoor&channel=1&UserID=101&Type=Remote"
+        command_on: "sudo /home/reinan/.homeassistant/shellscripts/ApriCancello.sh"
         
 #########################################
 #  xiaomi strips
@@ -79,3 +79,59 @@
       - light.cucina
       - light.pianerottolo_primo_piano
       - light.scale_soggiorno
+
+#########################################
+#  Tasmotized switches
+#  https://indomus.it/guide/come-aggiungere-interruttori-e-sensori-sonoff-a-home-assistant/
+#########################################
+
+  - platform: mqtt
+    name: "Disinserimento Totale Allarme"
+    state_topic: "stat/alarmrelay/POWER1"
+    command_topic: "cmnd/alarmrelay/POWER1"
+    availability_topic: "tele/alarmrelay/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+
+  - platform: mqtt
+    name: "Inserimento Totale Allarme"
+    state_topic: "stat/alarmrelay/POWER2"
+    command_topic: "cmnd/alarmrelay/POWER2"
+    availability_topic: "tele/alarmrelay/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - platform: mqtt
+    name: "Entertainment Alessandro"
+    state_topic: "stat/entertainmentalessandro/RESULT"
+    value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/entertainmentalessandro/POWER"
+    availability_topic: "tele/entertainmentalessandro/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - platform: mqtt
+    name: "Entertainemt Beatrice"
+    state_topic: "stat/entertainmentbeatrice/RESULT"
+    value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/entertainmentbeatrice/POWER"
+    availability_topic: "tele/entertainmentbeatrice/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false

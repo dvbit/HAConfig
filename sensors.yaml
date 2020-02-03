@@ -91,28 +91,164 @@
 
   - platform: mqtt
     state_topic: "emon/kitchen/ct1"
-    name: "Piastra"
+    name: "Consumo Piano Induzione"
     unit_of_measurement: "W"
 
   - platform: mqtt
     state_topic: "emon/kitchen/ct2"
-    name: "Forno"
+    name: "Consumo Forno"
     unit_of_measurement: "W"
 
   - platform: mqtt
     state_topic: "emon/kitchen/ct3"
-    name: "Lavastoviglie"
+    name: "Consumo Lavastoviglie"
     unit_of_measurement: "W"
 
   - platform: mqtt
     state_topic: "emon/laundry/ct1"
-    name: "Lavatrice"
+    name: "Consumo Lavatrice"
     unit_of_measurement: "W"
 
   - platform: mqtt
     state_topic: "emon/laundry/ct2"
-    name: "Asciugatrice"
+    name: "Consumo Asciugatrice"
     unit_of_measurement: "W"
+
+  - platform: mqtt
+    state_topic: 'monitor/PianoTerra/alias'
+    value_template: '{{ value_json.confidence }}'
+    unit_of_measurement: '%'
+    name: 'Presenza Piano Terra'
+
+# Prese Blitzwolf
+
+# Presa TV Ale BW1
+  - platform: mqtt
+    name: "Entertainment Alessandro: Energia Oggi"
+    state_topic: "tele/entertainmentalessandro/SENSOR"
+    value_template: "{{ value_json.ENERGY.Today }}"
+    availability_topic: "tele/entertainmentalessandro/LWT"
+    unit_of_measurement: "kWh"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Alessandro: Energia Ieri"
+    state_topic: "tele/entertainmentalessandro/SENSOR"
+    value_template: "{{ value_json.ENERGY.Yesterday }}"
+    availability_topic: "tele/entertainmentalessandro/LWT"
+    unit_of_measurement: "kWh"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Alessandro: Energia Totale"
+    state_topic: "tele/entertainmentalessandro/SENSOR"
+    value_template: "{{ value_json.ENERGY.Total }}"
+    availability_topic: "tele/entertainmentalessandro/LWT"
+    unit_of_measurement: "kWh"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Alessandro: Potenza"
+    state_topic: "tele/entertainmentalessandro/SENSOR"
+    value_template: "{{ value_json.ENERGY.Power }}"
+    availability_topic: "tele/entertainmentalessandro/LWT"
+    unit_of_measurement: "W"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Alessandro: Tensione"
+    state_topic: "tele/entertainmentalessandro/SENSOR"
+    value_template: "{{ value_json.ENERGY.Voltage }}"
+    availability_topic: "tele/entertainmentalessandro/LWT"
+    unit_of_measurement: "V"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Alessandro: Fattore Potenza"
+    state_topic: "tele/entertainmentalessandro/SENSOR"
+    value_template: "{{ value_json.ENERGY.Factor }}"
+    availability_topic: "tele/entertainmentalessandro/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Beatrice: Segnale WiFi"
+    icon: mdi:wifi
+    state_topic: "tele/entertainmentBeatrice/STATE"
+    value_template: "{{ value_json.Wifi.RSSI }}"
+    availability_topic: "tele/entertainmentBeatrice/LWT"
+    unit_of_measurement: "%"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+
+# Presa TV Bea BW2
+  - platform: mqtt
+    name: "Entertainment Beatrice: Energia Oggi"
+    state_topic: "tele/entertainmentBeatrice/SENSOR"
+    value_template: "{{ value_json.ENERGY.Today }}"
+    availability_topic: "tele/entertainmentbeatrice/LWT"
+    unit_of_measurement: "kWh"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Beatrice: Energia Ieri"
+    state_topic: "tele/entertainmentBeatrice/SENSOR"
+    value_template: "{{ value_json.ENERGY.Yesterday }}"
+    availability_topic: "tele/entertainmentbeatrice/LWT"
+    unit_of_measurement: "kWh"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Beatrice: Energia Totale"
+    state_topic: "tele/entertainmentBeatrice/SENSOR"
+    value_template: "{{ value_json.ENERGY.Total }}"
+    availability_topic: "tele/entertainmentbeatrice/LWT"
+    unit_of_measurement: "kWh"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Beatrice: Potenza"
+    state_topic: "tele/entertainmentbeatrice/SENSOR"
+    value_template: "{{ value_json.ENERGY.Power }}"
+    availability_topic: "tele/entertainmentbeatrice/LWT"
+    unit_of_measurement: "W"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Beatrice: Tensione"
+    state_topic: "tele/entertainmentBeatrice/SENSOR"
+    value_template: "{{ value_json.ENERGY.Voltage }}"
+    availability_topic: "tele/entertainmentbeatrice/LWT"
+    unit_of_measurement: "V"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Beatrice: Fattore Potenza"
+    state_topic: "tele/entertainmentbeatrice/SENSOR"
+    value_template: "{{ value_json.ENERGY.Factor }}"
+    availability_topic: "tele/entertainmentbeatrice/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    
+  - platform: mqtt
+    name: "Entertainment Beatrice: Segnale WiFi"
+    icon: mdi:wifi
+    state_topic: "tele/entertainmentbeatrice/STATE"
+    value_template: "{{ value_json.Wifi.RSSI }}"
+    availability_topic: "tele/entertainmentbeatrice/LWT"
+    unit_of_measurement: "%"
+    payload_available: "Online"
+    payload_not_available: "Offline"
 
 ##########################################
 # Command Line  
@@ -260,9 +396,14 @@
             n/a
             {% endif %}'
 
-#      tavolettawc:
-#         friendly_name: vibrate_sensor_action
-#         value_template: '{{ states.binary_sensor.vibration_158d0002a22bc6.attributes["last_action"] }}'
+      tavolettawc:
+         friendly_name: vibrate_sensor_action
+         value_template: '{{ states.binary_sensor.vibration_158d0002a22bc6.attributes["last_action"] }}'
+      
+#      lights_on:
+#        friendly_name: 'Luci Accese'
+#        value_template: {{ states | selectattr('entity_id','in', ['light.list_your_lights_here','switch.example_1','switch.example_2'] )|selectattr('state','eq','on') | list | count }}
+
 
   - platform: attributes
     friendly_name: "Last changed"
@@ -299,5 +440,15 @@
       - sensor.illumination_158d00024e7487
       - sensor.illumination_7811dcb22b4e
       - sensor.movimento_bagno_piano_light_level
+  
+  - platform: min_max
+    name: "Presenza in Casa"
+    type: max
+    round_digits: 0
+    entity_ids:
+      - sensor.PianoTerra
+      - sensor.PianoTerra
 
-     
+#      - sensor.second_floor
+#      - sensor.first_floor
+#      - sensor.garage

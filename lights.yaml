@@ -39,7 +39,13 @@
   - platform: xiaomi_miio
     name: Luce Scale Taverna
     host: philips-light-bulb-ScaleTaverna.fritz.box
-    token: fe820a69ee3f7a3f1a34c32836040aec
+    token: 86751219544175c71e4910d2a6e17e09
+    model: philips.light.bulb
+
+  - platform: xiaomi_miio
+    name: Luce Porta Garage
+    host: philips-light-bulb-PortaGarage.fritz.box
+    token: 8bed942e7d1cb12391147ba6e0640578
     model: philips.light.bulb
 
   - platform: xiaomi_miio
@@ -52,6 +58,8 @@
     name: Lampada Studio Taverna
     host: yeelink-light-lamp1-lampadastudio.fritz.box
     token: 0753c4bfc2690f687e4a55cb80b8cd07
+
+
 #    model: philips.light.lamp1
  
 #######################################################################################################
@@ -205,11 +213,21 @@
 
 
   - platform: group
-    name: Luci Scale
+    name: Luci Scale Soggiorno
     entities:
       - light.pianerottolo_primo_piano
       - light.scale_soggiorno
 
+  - platform: group
+    name: Luci Scale Taverna
+    entities:
+      - light.luce_porta_garage
+      - light.luce_scale_taverna
+
+  - platform: flux_led
+    devices:
+      192.168.2.72:
+        name: Led Termoarredo Camera da letto
 
 # Virtual Bulb to query Home States
 # https://community.home-assistant.io/t/speech-parser-script-to-extract-entity-id-information-into-readable-form-for-alexa-or-google-assistant-tts/76428

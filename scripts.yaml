@@ -1,18 +1,78 @@
-'1579886801000':
-  alias: Invia Foto Ultima Persona Ingresso
+inviafotoingresso:
+  alias: Invia Foto Ingresso
   sequence:
   - data:
-      caption: 'Attenzione : Persona Lato Ingresso'
+      caption: Foto Lato Ingresso
       disable_notification: true
       file: /home/reinan/.homeassistant/www/images/ingresso/Sicurezza Ingresso_latest_person.jpg
       target: '485476558'
     service: telegram_bot.send_photo
-'1579886930482':
-  alias: Invia Foto Ultima Persona Casetta
+inviafotocasetta:
+  alias: Invia Foto Casetta
   sequence:
   - data:
-      caption: 'Attenzione : Persona Lato Giardino'
+      caption: Foto Lato Casetta
       disable_notification: true
       file: /home/reinan/.homeassistant/www/images/casetta/Sicurezza Casetta_latest_person.jpg
       target: '485476558'
     service: telegram_bot.send_photo
+inviafotoportico:
+  alias: Invia Foto Portico
+  sequence:
+  - data:
+      caption: Foto Lato Portico
+      disable_notification: true
+      file: /home/reinan/.homeassistant/www/images/portico/Sicurezza Portico_latest_person.jpg
+      target: '485476558'
+    service: telegram_bot.send_photo
+inviafotoultimavistacitofono:
+  alias: Invia Foto Citofono
+  sequence:
+  - data:
+      caption: Ultimo Snapshot dal Citofono
+      disable_notification: true
+      file: /home/reinan/.homeassistant/www/images/citofono/Sicurezza Citofono_latest_person.jpg
+      target: '485476558'
+    service: telegram_bot.send_photo
+
+'scattafotoingresso':
+  alias: Scatta Foto Ingresso
+  sequence:
+  - data:
+      entity_id: camera.telecameraingresso
+      filename: /home/reinan/.homeassistant/www/images/ingresso/Sicurezza Ingresso_latest_person.jpg
+    entity_id: camera.telecameraingresso
+    service: camera.snapshot
+'scattafotocasetta':
+  alias: Scatta Foto Casetta
+  sequence:
+  - data:
+      entity_id: camera.telecameracasetta
+      filename: /home/reinan/.homeassistant/www/images/casetta/Sicurezza Casetta_latest_person.jpg
+    service: camera.snapshot
+'scattafotoportico':
+  alias: Scatta Foto Portico
+  sequence:
+  - data:
+      entity_id: camera.telecameraportico
+      filename: /home/reinan/.homeassistant/www/images/portico/Sicurezza Portico_latest_person.jpg
+    entity_id: camera.telecameraportico
+    service: camera.snapshot
+
+accendilucicamminoingresso:
+  alias: Accendi Luci Cammino Ingresso
+  sequence:
+  - service: light.turn_on
+    data:
+      entity_id: light.luci_cammino_ingresso
+  - service: light.turn_on
+    data:
+      entity_id: light.luce_portico_ingresso
+  - delay: 00:01:00
+  - service: light.turn_off
+    data:
+      entity_id: light.luci_cammino_ingresso
+  - service: light.turn_off
+    data:
+      entity_id: light.luce_portico_ingresso
+
