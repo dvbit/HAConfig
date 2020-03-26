@@ -250,6 +250,47 @@
     payload_available: "Online"
     payload_not_available: "Offline"
 
+  - platform: mqtt
+    name: "DahuaVTO CallNoAnswered Event"
+    state_topic: "DahuaVTO/CallNoAnswered/Event"
+    value_template: "{{ value_json.Action }}"
+
+  - platform: mqtt
+    name: "DahuaVTO IgnoreInvite Event"
+    state_topic: "DahuaVTO/IgnoreInvite/Event"
+    value_template: "{{ value_json.Action }}"
+
+  - platform: mqtt
+    name: "DahuaVTO VideoMotion Event"
+    state_topic: "DahuaVTO/VideoMotion/Event"
+    value_template: "{{ value_json.Action }}"
+
+  - platform: mqtt
+    name: "DahuaVTO RtspSessionDisconnect Event"
+    state_topic: "DahuaVTO/RtspSessionDisconnect/Event"
+    value_template: "{{ value_json.Action }}"
+
+  - platform: mqtt
+    name: "DahuaVTO BackKeyLight Event"
+    state_topic: "DahuaVTO/BackKeyLight/Event"
+    value_template: "{{ value_json.Action }}"
+
+  - platform: mqtt
+    name: "DahuaVTO AccessControl Event"
+    state_topic: "DahuaVTO/AccessControl/Event"
+    value_template: "{{ value_json.Action }}"
+
+  - platform: mqtt
+    name: "DahuaVTO CallSnap Event"
+    state_topic: "DahuaVTO/CallSnap/Event"
+    value_template: "{{ value_json.Action }}"
+
+  - platform: mqtt
+    name: "DahuaVTO Invite Event"
+    state_topic: "DahuaVTO/Invite/Event"
+    value_template: "{{ value_json.Action }}"
+
+
 ##########################################
 # Command Line  
 ##########################################

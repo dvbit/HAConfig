@@ -26,7 +26,7 @@
 - id: '1566418588293'
   alias: Porta Ingresso ON1
   trigger:
-  - entity_id: binary_sensor.everspring_sm103_door_window_sensor_sensor
+  - entity_id: binary_sensor.porta_casa
     from: 'off'
     platform: state
     to: 'on'
@@ -44,7 +44,7 @@
 - id: '1566418588297'
   alias: Porta Ingresso ON2
   trigger:
-  - entity_id: binary_sensor.everspring_sm103_door_window_sensor_sensor
+  - entity_id: binary_sensor.porta_casa
     from: 'off'
     platform: state
     to: 'on'
@@ -63,7 +63,7 @@
 - id: '1566418804488'
   alias: Porta Ingresso OFF
   trigger:
-  - entity_id: binary_sensor.everspring_sm103_door_window_sensor_sensor
+  - entity_id: binary_sensor.porta_casa
     for: '50'
     from: 'on'
     platform: state
@@ -623,3 +623,41 @@
   action:
   - service: script.scattafotoingresso
   - service: script.inviafotoingresso
+- id: '1581872596876'
+  alias: ApriCancelloDaRemoto
+  description: Apri il cancello da Google Home
+  trigger:
+  - platform: webhook
+    webhook_id: ApriCancello
+  condition: []
+  action:
+  - service: script.inviafotoingresso
+
+- id: update_networkmap
+  alias: 'Zigbee Map aktualisieren'  
+  hide_entity: true  
+  trigger:
+    platform: time_pattern
+    minutes: '/10'
+    seconds: 00
+  action:
+      service: zigbee2mqtt_networkmap.update
+
+- id: riconoscimento_facebox
+  alias: Riconosciuto Nicola
+  trigger:
+    platform: event
+    event_type: image_processing.detect_face
+    event_data:
+      name: 'nicola'
+  action:
+  - service: notify.alexa_media
+    data:
+      target:
+#      - media_player.echo_dot_camera_da_letto
+#      - media_player.echo_show_cucina
+      - media_player.echo_plus_salone
+      title: Titolo per echo Show
+      data:
+        type: announce
+      message: Ho visto Nicola in Salone

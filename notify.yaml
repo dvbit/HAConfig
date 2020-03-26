@@ -1,6 +1,6 @@
   - platform: alexa_media
     name: alexa_media
   
-  - platform: twilio_whatsapp
-    name: Whatsapp
-    from_number: whatsapp:+14155238886
+  #- platform: twilio_whatsapp
+  #  name: Whatsapp
+  #  from_number: whatsapp:+14155238886

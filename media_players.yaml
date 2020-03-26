@@ -10,9 +10,9 @@
     host: firetvalessandro.fritz.box
     adb_server_ip: reinasserver.fritz.box
 
-  - platform: spotify
-    client_id: !secret spotifyclient_id
-    client_secret: !secret spotifyclient_secret  
+  #- platform: spotify
+   # client_id: !secret spotifyclient_id
+    #client_secret: !secret spotifyclient_secret  
   - platform:  skyq
     name: SkyQ
     host: skyq.fritz.box
