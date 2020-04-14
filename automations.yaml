@@ -262,7 +262,7 @@
   condition:
   - below: '25'
     condition: numeric_state
-    entity_id: sensor.illumination_158d00024e730c
+    entity_id: sensor.0x00158d00024e76f5_illuminance
   action:
   - data:
       entity_id: light.cespuglio_ingresso
@@ -632,30 +632,26 @@
   condition: []
   action:
   - service: script.inviafotoingresso
-
 - id: update_networkmap
-  alias: 'Zigbee Map aktualisieren'  
-  hide_entity: true  
+  alias: Zigbee Map aktualisieren
+  hide_entity: true
   trigger:
     platform: time_pattern
-    minutes: '/10'
-    seconds: 00
+    minutes: /10
+    seconds: 0
   action:
-      service: zigbee2mqtt_networkmap.update
-
+    service: zigbee2mqtt_networkmap.update
 - id: riconoscimento_facebox
   alias: Riconosciuto Nicola
   trigger:
     platform: event
     event_type: image_processing.detect_face
     event_data:
-      name: 'nicola'
+      name: nicola
   action:
   - service: notify.alexa_media
     data:
       target:
-#      - media_player.echo_dot_camera_da_letto
-#      - media_player.echo_show_cucina
       - media_player.echo_plus_salone
       title: Titolo per echo Show
       data:

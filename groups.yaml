@@ -8,11 +8,10 @@
 
 Movimento Piano Terra:
   name: Movimento Piano Terra 
-  view: yes
   entities:
     - binary_sensor.motion_sensor_158d00015d4d01
-    - binary_sensor.motion_sensor_158d000123201f
-    - binary_sensor.motion_sensor_158d00024e6ca3
+    - binary_sensor.movimento_bagno_camera_da_letto_occupancy
+    - binary_sensor.movimento_cucina_occupancy
     - binary_sensor.motion_sensor_158d00024e730c
     - binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
     - binary_sensor.movimento_letto_giovanna_motion
@@ -22,7 +21,6 @@ Movimento Piano Terra:
 
 Movimento Primo Piano:
   name: Movimento Primo Piano 
-  view: yes
   entities:
     - binary_sensor.motion_sensor_158d00024e7487
     - binary_sensor.motion_sensor_158d00024e6ca2
@@ -31,18 +29,16 @@ Movimento Primo Piano:
 
 Movimento Altro:
   name: Movimento Altro 
-  view: yes
   entities:
     - binary_sensor.motion_sensor_158d000120cbde
     - binary_sensor.motion_sensor_158d00015f049d
 
 Movimento:
   name: Movimento  
-  view: yes
   entities:
-    - binary_sensor.motion_sensor_158d00015d4d01
+    - binary_sensor.movimento_bagno_camera_da_letto_occupancy
     - binary_sensor.motion_sensor_158d000123201f
-    - binary_sensor.motion_sensor_158d00024e6ca3
+    - binary_sensor.movimento_cucina_occupancy
     - binary_sensor.motion_sensor_158d00024e730c
     - binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
     - binary_sensor.movimento_letto_giovanna_motion
@@ -58,7 +54,6 @@ Movimento:
 
 Telecamere:
   name: Telecamere
-  view: yes
   entities:
     - camera.telecameracitofono
     - camera.telecameramonitor
@@ -71,7 +66,6 @@ Telecamere:
 
 Luci Esterno:
   name: Luci Esterno
-  view: yes
   entities:
     - light.luce_esterno_alessandro
     - light.luce_esterno_cancelletto
@@ -83,7 +77,6 @@ Luci Esterno:
 
 Luci Esterno Notte:
   name: Luci Esterno Notte
-  view: yes
   entities: 
     - light.luce_esterno_cancelletto
     - light.luce_esterno_cucina
@@ -92,7 +85,6 @@ Luci Esterno Notte:
 
 Luci Cucina:
   name: Luci Cucina
-  view: yes
   all: true
   entities:
     - light.luce_cucina
@@ -100,7 +92,6 @@ Luci Cucina:
 
 Luci Camera da Letto:
   name: Luci Camera da Letto
-  view: yes
   all: true
   entities:
     - light.lampada_sale_camera_da_letto
@@ -112,7 +103,6 @@ Luci Camera da Letto:
 
 Luci Soggiorno:
   name: Luci Soggiorno
-  view: yes
   all: true
   entities:
     - light.cespuglio_ingresso
@@ -122,7 +112,6 @@ Luci Soggiorno:
   
 Luci Esterno Avanti:
   name: Luci Esterno Avanti
-  view: yes
   all: true
   entities:
     - light.luce_esterno_alessandro
@@ -132,7 +121,6 @@ Luci Esterno Avanti:
 
 Luci Esterno Retro:
   name: Luci Esterno Retro
-  view: yes
   all: true
   entities:
     - light.luce_esterno_cucina
@@ -141,7 +129,6 @@ Luci Esterno Retro:
 
 Luci Giardino:
   name: Luci Giardino
-  view: yes
   all: true
   entities:
     - light.luci_giardino_lontano
@@ -150,7 +137,6 @@ Luci Giardino:
 
 Luci Giardino Dietro:
   name: Luci Giardino Dietro
-  view: yes
   all: true
   entities:
     - light.luci_giardino_lontano
@@ -158,7 +144,6 @@ Luci Giardino Dietro:
 
 Luci Giardino Avanti:
   name: Luci Giardino Avanti
-  view: yes
   all: true
   entities:
     - light.luci_cammino_ingresso
@@ -166,7 +151,6 @@ Luci Giardino Avanti:
 
 Luci Scale:
   name: Luci Scale
-  view: yes
   all: true
   entities:
     - light.pianerottolo_primo_piano
@@ -174,7 +158,6 @@ Luci Scale:
 
 Previsioni Giornaliere:
   name: Previsioni Giornaliere
-  view: yes
   entities:
     - sensor.wupws_weather_1d
     - sensor.wupws_weather_1n

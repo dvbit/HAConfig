@@ -34,7 +34,6 @@
 #  password: !secret TelecameraCucinadahuapass
 #
 
-
 - platform: generic
   name:  TelecameraCitofono
   still_image_url: !secret TelecameraCitofonostill

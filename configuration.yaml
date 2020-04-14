@@ -81,24 +81,55 @@ http:
 
 uilogs:
 
+#mfa
+  auth_mfa_modules:
+    - type: totp
+      include:
+        - notify_entity
+    - type: notify
+      message: 'I almost forget, to get into my clubhouse, you need to say {}'
 #panels
 # https://www.home-assistant.io/components/panel_custom/
 
 api:
 
 panel_iframe:
-#  mdiindex:
-#    title: MDI Icon Index
-#    icon: mdi:vector-square
-#    url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
-  dockerstatus:
-    title: Docker Status
+  nodered:
+    title: nodered
     icon: mdi:docker
-    url: http://reinasserver.fritz.box:9900/
+    url: https://nodered.thereinas.it/
+  portainer:
+    title: portainer
+    icon: mdi:docker
+    url: https://portainer.thereinas.it/
   combivox:
     title: Combivox
-    icon: mdi:alarm
-    url: http://combivox.fritz.box
+    icon: mdi:alarm-light
+    url: https://combivox.thereinas.it
+  opensprinkler:
+    title: OpenSprinkler
+    icon: mdi:fountain
+    url: https://opensprinkler.thereinas.it
+  opengarage:
+    title: OpenGarage
+    icon: mdi:garage
+    url: https://opengarage.thereinas.it
+  fritzbox:
+    title: FritzBox
+    icon: mdi:wan
+    url: https://fritz.thereinas.it
+  unifi:
+    title: Unifi
+    icon: mdi:lan
+    url: https://unifi.thereinas.it
+  webmin:
+    title: Webmin
+    icon: mdi:server
+    url: https://reinasserver.fritz.box:10000
+  homedoor:
+    title: Door
+    icon: mdi:door
+    url: https://web.nuki.io
   zigbee2mqttassistant:
     title: Zigbee2MQTTAssistant
     url: http://reinasserver.fritz.box:8887
@@ -114,13 +145,15 @@ panel_custom:
     url_path: zwave
 
 #######################################################
-# lovelace : real men use CLI
+# lovelace : real men used CLI
 ########################################################
 
 
 lovelace:
-  mode: storage
+  mode: yaml
   resources:
+    - url: /community_plugin/button-text-card/button-text-card.js
+      type: module
     - url: /local/battery-entity.js?v=0.1
       type: module
     - url: /community_plugin/soft_ui_elements/soft-ui-general-card.js
@@ -273,7 +306,26 @@ lovelace:
       type: module
     - url: /community_plugin/harmony-card/harmony-card.js
       type: module  
-  
+  dashboards:
+    lovelace-generated: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: notexist.yaml
+      title: Generated
+      icon: mdi:tools
+      show_in_sidebar: true
+      require_admin: true
+    lovelace-hidden:
+      mode: yaml
+      title: hidden
+      show_in_sidebar: false
+      filename: hidden.yaml
+    lovelace-yaml:
+      mode: yaml
+      title: YAML
+      icon: mdi:script
+      show_in_sidebar: true
+      filename: lovelace.yaml  
+
 #######################################################
 # lovelace_gen : https://github.com/thomasloven/hass-lovelace_gen
 ########################################################
@@ -377,6 +429,7 @@ tuya:
 #      allow_unreachable: true
 #      allow_hue_groups: true
 
+
 ambient_station:
   api_key: YOUR_API_KEY
   app_key: YOUR_APPLICATION_KEY
@@ -413,7 +466,7 @@ bmw_connected_drive:
 #locks and doors
 lock:
   - platform: nuki
-    host: AndroidService.fritz.box
+    host: 192.168.2.98
     token: !secret nukitoken
 
 cover:
@@ -429,10 +482,26 @@ telegram_bot:
     allowed_chat_ids: 
       - !secret telegram_bot_chat_id
 
+octoprint:
+  host: secret !reinasserver
+  api_key: secret !octoapi
 yeelight:
   devices:
-    yeelink-light-strip1-ledlettoale.fritz.box:
+    192.168.2.45:
       name: Led Letto Alessandro
+      model: strip1
+    192.168.2.84:
+      name: Lampada Comodino Nicola
+      model: bslamp1
+
+# SpeedTest
+speedtestdotnet:
+  scan_interval:
+    hours: 12
+  monitored_conditions:
+    - ping
+    - download
+    - upload
 
 alexa_media:
   accounts:
@@ -706,7 +775,7 @@ glances:
 #        name: Camera Cucina
         
 device_tracker: !include device_trackers.yaml
-#group: !include groups.yaml
+group: !include groups.yaml
 light: !include lights.yaml
 switch: !include switches.yaml
 script: !include scripts.yaml
@@ -720,4 +789,5 @@ camera: !include cameras.yaml
 notify: !include notify.yaml
 rest_command: !include restcommands.yaml
 input_datetime: !include input_datetime.yaml
+input_number: !include input_number.yaml
 

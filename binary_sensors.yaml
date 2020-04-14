@@ -71,25 +71,31 @@
         delay_off:
           minutes: 5
         value_template: >-
-          {{ states('sensor.consumo_asciugatice')|float > 15 }}
+          {{ states('sensor.consumo_asciugatice')|float < 10 }}
       lavatrice:
         friendly_name: "Lavatrice"
         delay_off:
           minutes: 5
         value_template: >-
-          {{ states('sensor.consumo_lavatrice')|float > 15 }}
+          {{ states('sensor.consumo_lavatrice')|float < 10 }}
       forno:
         friendly_name: "Forno"
         delay_off:
           minutes: 5
         value_template: >-
-          {{ states('sensor.consumo_forno')|float > 15 }}
+          {{ states('sensor.consumo_forno')|float > -15 }}
       lavastoviglie:
         friendly_name: "Lavastoviglie"
         delay_off:
           minutes: 5
         value_template: >-
-          {{ states('sensor.consumo_lavastoviglie')|float > 15 }}
+          {{ states('sensor.consumo_lavastoviglie')|float > -15 }}
+      scurofuori:
+        friendly_name: "Scuro Fuori"
+        delay_off: 
+          minutes: 5
+        value_template: >-
+          {{ states('sensor.yrs_illuminance')|float < 5000 }}
 
   - platform: workday
     name: giornolavorativo

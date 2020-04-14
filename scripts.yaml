@@ -34,8 +34,7 @@ inviafotoultimavistacitofono:
       file: /home/reinan/.homeassistant/www/images/citofono/Sicurezza Citofono_latest_person.jpg
       target: '485476558'
     service: telegram_bot.send_photo
-
-'scattafotoingresso':
+scattafotoingresso:
   alias: Scatta Foto Ingresso
   sequence:
   - data:
@@ -43,14 +42,14 @@ inviafotoultimavistacitofono:
       filename: /home/reinan/.homeassistant/www/images/ingresso/Sicurezza Ingresso_latest_person.jpg
     entity_id: camera.telecameraingresso
     service: camera.snapshot
-'scattafotocasetta':
+scattafotocasetta:
   alias: Scatta Foto Casetta
   sequence:
   - data:
       entity_id: camera.telecameracasetta
       filename: /home/reinan/.homeassistant/www/images/casetta/Sicurezza Casetta_latest_person.jpg
     service: camera.snapshot
-'scattafotoportico':
+scattafotoportico:
   alias: Scatta Foto Portico
   sequence:
   - data:
@@ -58,7 +57,6 @@ inviafotoultimavistacitofono:
       filename: /home/reinan/.homeassistant/www/images/portico/Sicurezza Portico_latest_person.jpg
     entity_id: camera.telecameraportico
     service: camera.snapshot
-
 accendilucicamminoingresso:
   alias: Accendi Luci Cammino Ingresso
   sequence:
@@ -75,4 +73,59 @@ accendilucicamminoingresso:
   - service: light.turn_off
     data:
       entity_id: light.luce_portico_ingresso
-
+'1586713907065':
+  alias: GuardaSky
+  sequence:
+  - data:
+      activity: 43964168
+    entity_id: remote.harmony
+    service: remote.turn_on
+'1572713907065':
+  alias: GuardaStreaming
+  sequence:
+  - data:
+      activity: 43964384
+    entity_id: remote.harmony
+    service: remote.turn_on
+'1577853427065':
+  alias: GiocaconXbox
+  sequence:
+  - data:
+      activity: 41599761
+    entity_id: remote.harmony
+    service: remote.turn_on
+'1333853427065':
+  alias: Spegni
+  sequence:
+  - data:
+      activity: -1
+    entity_id: remote.harmony
+    service: remote.turn_on
+'1586714522242':
+  alias: Pausa
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.harmony
+      command:
+        - Pause
+      device: 65706522
+'1589653522242':
+  alias: Play
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.harmony
+      command:
+      - Play/Pause
+      device_id: 65706522
+'1586329872242':
+  alias: Mute
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.harmony
+      command:
+      - Mute
+      device_id: 65706522
+    

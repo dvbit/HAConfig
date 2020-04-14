@@ -7,8 +7,7 @@
   - platform: androidtv
     name: Fire TV Alessandro
     device_class: androidtv
-    host: firetvalessandro.fritz.box
-    adb_server_ip: reinasserver.fritz.box
+    host: firetvale.fritz.box
 
   #- platform: spotify
    # client_id: !secret spotifyclient_id

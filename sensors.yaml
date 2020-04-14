@@ -290,6 +290,40 @@
     state_topic: "DahuaVTO/Invite/Event"
     value_template: "{{ value_json.Action }}"
 
+#manual zigbww2mqtt
+
+#sensor:
+#  - platform: "mqtt"
+#    state_topic: "zigbee2mqtt/Clima Bagno Camera da Letto"
+#    availability_topic: "zigbee2mqtt/bridge/state"
+#    unit_of_measurement: "°C"
+#    device_class: "temperature"
+#    value_template: "{{ value_json.temperature }}"
+#
+#
+#sensor:
+#  - platform: "mqtt"
+#    state_topic: "zigbee2mqtt/Clima Bagno Camera da Letto"
+#    availability_topic: "zigbee2mqtt/bridge/state"
+#    unit_of_measurement: "%"
+#    device_class: "humidity"
+#    value_template: "{{ value_json.humidity }}"
+#
+#sensor:
+#  - platform: "mqtt"
+#    state_topic: "zigbee2mqtt/Clima Bagno Camera da Letto"
+#    availability_topic: "zigbee2mqtt/bridge/state"
+#    unit_of_measurement: "%"
+#    device_class: "battery"
+#    value_template: "{{ value_json.battery }}"
+#
+#sensor:
+#  - platform: "mqtt"
+#    state_topic: "zigbee2mqtt/Clima Bagno Camera da Letto"
+#    availability_topic: "zigbee2mqtt/bridge/state"
+#    icon: "mdi:signal"
+#    unit_of_measurement: "lqi"
+#    value_template: "{{ value_json.linkquality }}"
 
 ##########################################
 # Command Line  
@@ -482,14 +516,39 @@
       - sensor.illumination_7811dcb22b4e
       - sensor.movimento_bagno_piano_light_level
   
-  - platform: min_max
-    name: "Presenza in Casa"
-    type: max
-    round_digits: 0
-    entity_ids:
-      - sensor.PianoTerra
-      - sensor.PianoTerra
-
+#  - platform: min_max
+#    name: "Presenza in Casa"
+#    type: max
+#    round_digits: 0
+#    entity_ids:
+#      - sensor.PianoTerra
+#      - sensor.PianoTerra
 #      - sensor.second_floor
 #      - sensor.first_floor
 #      - sensor.garage
+
+  - platform: yr
+    monitored_conditions:
+      - symbol
+  - platform: illuminance
+    name: YRS Illuminance
+    entity_id: sensor.yr_symbol
+
+  - platform: darksky
+    api_key: !secret darkskyapi
+    forecast:
+      - 0
+    hourly_forecast:
+      - 0
+      - 1
+    monitored_conditions:
+      - summary
+      - icon
+      - temperature
+
+
+  - platform: cups
+    host: !secret cupsserver    
+    port: 631
+    printers:
+      - "Officejet_Pro_8600_CA8FDE_"
