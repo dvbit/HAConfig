@@ -390,26 +390,46 @@
 # Climate Temp Extractions
 #########################################
       temperatura_att_casa:
+        friendly_name: Temperatura Casa
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.casa.attributes.current_temperature | float}}'
       temperatura_att_alessandro:
+        friendly_name: Temperatura Camera Alessandro
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.alessandro.attributes.current_temperature  | float}}'
       temperatura_att_beatrice:
+        friendly_name: Temperatura Camera Beatrice
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.beatrice.attributes.current_temperature  | float}}'
       temperatura_att_gio_e_nic:
+        friendly_name: Temperatura Camera da Letto
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.gio_e_nic.attributes.current_temperature }}'
 #      temperatura_att_bagno_gio_e_nic:
 #        value_template: '{{ states.climate.bagno_gio_e_nic.attributes.current_temperature }}'
       temperatura_att_soggiorno:
+        friendly_name: Temperatura Soggiorno
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.soggiorno.attributes.current_temperature }}'
       temperatura_att_bagno_taverna:
+        friendly_name: Temperatura Bagno Taverna
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.bagno_taverna.attributes.current_temperature }}'
       temperatura_att_bagno_su:
+        friendly_name: Temperatura Bagno Primo Piano
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.bagno_su.attributes.current_temperature }}'
       temperatura_att_letto_taverna:
+        friendly_name: Temperatura Camera Letto Taverna
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.letto_taverna.attributes.current_temperature }}'
       temperatura_att_salone_taverna:
+        friendly_name: Temperatura Soggiorno Taverna
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.salone_taverna.attributes.current_temperature }}'
       temperatura_att_studio:
+        friendly_name: Temperatura Studio
+        unit_of_measurement: 'degrees'
         value_template: '{{ states.climate.studio.attributes.current_temperature }}'
 
 
@@ -441,7 +461,7 @@
 #############################################################################################################################
 
       garage_status:
-        friendly_name: 'Basculante Garage'
+        friendly_name: 'Garage'
         value_template: '{% if states.cover.my_opengarage %}
             {% if states.cover.my_opengarage.attributes["door_state"] == "open" %}
               Open
@@ -461,14 +481,14 @@
         friendly_name: 'Auto in Garage'
         value_template: '{% if states.cover.my_opengarage %}
             {% if states.cover.my_opengarage.state == "open" %}
-              n/a
+              n/d
             {% elif ((states.cover.my_opengarage.attributes["distance_sensor"] > 50) and (states.cover.my_opengarage.attributes["distance_sensor"] < 150)) %}
-              Yes
+              Si
             {% else %}
               No
             {% endif %}
             {% else %}
-            n/a
+            n/d
             {% endif %}'
 
       tavolettawc:
@@ -547,8 +567,12 @@
       - temperature
 
 
-  - platform: cups
-    host: !secret cupsserver    
-    port: 631
-    printers:
-      - "Officejet_Pro_8600_CA8FDE_"
+#  - platform: cups
+#    host: !secret cupsserver    
+#    port: 631
+#    printers:
+#      - "Officejet_Pro_8600_CA8FDE_"
+  - platform: statistics
+    entity_id: sensor.bed_sensor
+
+#    

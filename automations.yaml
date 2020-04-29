@@ -462,7 +462,7 @@
       target:
       - media_player.echo_dot_camera_da_letto
       - media_player.echo_show_cucina
-      - media_player.echo_plus_salone
+      - media_player.echo_plus_soggiorno
       title: Titolo per echo Show
       data:
         type: announce

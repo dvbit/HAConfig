@@ -9,48 +9,56 @@
 Movimento Piano Terra:
   name: Movimento Piano Terra 
   entities:
-    - binary_sensor.motion_sensor_158d00015d4d01
     - binary_sensor.movimento_bagno_camera_da_letto_occupancy
-    - binary_sensor.movimento_cucina_occupancy
-    - binary_sensor.motion_sensor_158d00024e730c
-    - binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
     - binary_sensor.movimento_letto_giovanna_motion
     - binary_sensor.movimento_letto_nicola_motion
+    - binary_sensor.movimento_cabina_armadio_occupancy
+    - binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
+    - binary_sensor.movimento_divano_occupancy
+    - binary_sensor.movimento_cucina_occupancy
     - binary_sensor.movimento_scale_soggiorno_motion
-    - binary_sensor.motion_sensor_158d00024edfce
+    - binary_sensor.movimento_tavolo_soggiorno_occupancy
+    - binary_sensor.movimento_scale_taverna_su_occupancy
 
 Movimento Primo Piano:
   name: Movimento Primo Piano 
   entities:
-    - binary_sensor.motion_sensor_158d00024e7487
-    - binary_sensor.motion_sensor_158d00024e6ca2
-    - binary_sensor.motion_sensor_158d000120cba5
-    - binary_sensor.movimento_pianerottolo_piano_motion
+    - binary_sensor.movimento_pianerottolo_primo_piano_motion
+    - binary_sensor.movimento_bagno_primo_piano_motion
+    - binary_sensor.movimento_1_occupancy
+    - binary_sensor.movimento_2_occupancy
+    - binary_sensor.movimento_alessandro_occupancy
+    - binary_sensor.movimento_pavimento_alessandro_occupancy
+    - binary_sensor.movimento_beatrice_occupancy
 
-Movimento Altro:
-  name: Movimento Altro 
+Movimento Taverna:
+  name: Movimento Taverna 
   entities:
-    - binary_sensor.motion_sensor_158d000120cbde
-    - binary_sensor.motion_sensor_158d00015f049d
+    - binary_sensor.movimento_scale_taverna_giu_occupancy
 
-Movimento:
-  name: Movimento  
+
+Movimento Casa:
+  name: Movimento Casa  
   entities:
     - binary_sensor.movimento_bagno_camera_da_letto_occupancy
-    - binary_sensor.motion_sensor_158d000123201f
-    - binary_sensor.movimento_cucina_occupancy
-    - binary_sensor.motion_sensor_158d00024e730c
-    - binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
     - binary_sensor.movimento_letto_giovanna_motion
     - binary_sensor.movimento_letto_nicola_motion
+    - binary_sensor.movimento_cabina_armadio_occupancy
+    - binary_sensor.fibaro_system_fgms001_motion_sensor_sensor
+    - binary_sensor.movimento_divano_occupancy
+    - binary_sensor.movimento_cucina_occupancy
     - binary_sensor.movimento_scale_soggiorno_motion
-    - binary_sensor.motion_sensor_158d00024edfce
-    - binary_sensor.motion_sensor_158d00024e7487
-    - binary_sensor.motion_sensor_158d00024e6ca2
-    - binary_sensor.motion_sensor_158d000120cba5
-    - binary_sensor.movimento_pianerottolo_piano_motion
-    - binary_sensor.motion_sensor_158d000120cbde
-    - binary_sensor.motion_sensor_158d00015f049d
+    - binary_sensor.movimento_tavolo_soggiorno_occupancy
+    - binary_sensor.movimento_scale_taverna_su_occupancy
+    - binary_sensor.movimento_scale_taverna_giu_occupancy
+    - binary_sensor.movimento_pianerottolo_primo_piano_motion
+    - binary_sensor.movimento_bagno_primo_piano_motion
+    - binary_sensor.movimento_1_occupancy
+    - binary_sensor.movimento_2_occupancy
+    - binary_sensor.movimento_alessandro_occupancy
+    - binary_sensor.movimento_pavimento_alessandro_occupancy
+    - binary_sensor.movimento_beatrice_occupancy
+
 
 Telecamere:
   name: Telecamere
@@ -64,6 +72,12 @@ Telecamere:
     - camera.telecameraletto
     - camera.telecamerasalone
 
+#######################################################
+#
+#  Luci
+#
+#######################################################
+
 Luci Esterno:
   name: Luci Esterno
   entities:
@@ -73,6 +87,14 @@ Luci Esterno:
     - light.luce_esterno_salone
     - light.luce_esterno_taverna
     - light.luci_cammino_ingresso
+    - light.luce_portico_ingresso
+
+Luci Portico:
+  name: Luci Portico
+  entities:
+    - light.luce_esterno_cucina
+    - light.luce_esterno_salone
+    - light.luce_esterno_taverna
     - light.luce_portico_ingresso
 
 Luci Esterno Notte:
@@ -99,7 +121,24 @@ Luci Camera da Letto:
     - light.faretti_idromassaggio_camera_da_letto
     - light.faretti_interno_cabina_camera_da_letto
     - light.faretti_esterno_cabina_camera_da_letto
-    - light.led_letto
+    - light.led_camera_da_letto
+    - light.led_termoarredo_camera_da_letto
+
+Luci Camera Alessandro:
+  name: Luci Camera Alessandro
+  all: true
+  entities:
+    - light.faretti_armadio_alessandro
+    - light.faretti_letto_alessandro
+    - light.led_letto_alessandro
+    - light.luce_letto_alessandro
+
+Luci Camera Beatrice:
+  name: Luci Camera Beatrice
+  all: true
+  entities:
+    - light.lampada_beatrice
+    - light.lampadario_beatrice
 
 Luci Soggiorno:
   name: Luci Soggiorno
@@ -107,9 +146,24 @@ Luci Soggiorno:
   entities:
     - light.cespuglio_ingresso
     - light.cespuglio_divano
-    - light.luce_tavolo
-    - light.tavolo
-  
+    - light.luce_tavolo_soggiorno
+    - light.luce
+    - light.luce_tavolo_soggiorno
+
+Luci Scale Casa:
+  name: Luci Scale Casa
+  all: true
+  entities:
+    - light.spot_pianerottolo_primo_piano
+    - light.spot_scale_ingresso
+
+Luci Scale Taverna:
+  name: Luci Scale Taverna
+  all: true
+  entities:
+    - light.luce_scale_taverna
+    - light.luce_porta_garage
+
 Luci Esterno Avanti:
   name: Luci Esterno Avanti
   all: true
@@ -148,13 +202,153 @@ Luci Giardino Avanti:
   entities:
     - light.luci_cammino_ingresso
 
+Luci Casa Interno:
+  name: Luci Casa Interno
+  all: true
+  entities:
+    - light.cespuglio_ingresso
+    - light.cespuglio_divano
+    - light.tavolo
+    - light.luce_tavolo_soggiorno
+    - light.luce_tavolo_soggiorno_hue
+    - light.luce_cucina
+    - light.cucina
+    - light.lampada_sale_camera_da_letto
+    - light.faretti_letto_camera_da_letto
+    - light.faretti_idromassaggio_camera_da_letto
+    - light.faretti_interno_cabina_camera_da_letto
+    - light.faretti_esterno_cabina_camera_da_letto
+    - light.led_camera_da_letto
+    - light.led_termoarredo_camera_da_letto
+    - light.spot_pianerottolo_primo_piano
+    - light.faretti_armadio_alessandro
+    - light.faretti_letto_alessandro
+    - light.led_letto_alessandro
+    - light.luce_letto_alessandro
+    - light.lampada_beatrice
+    - light.lampadario_beatrice
+    - light.scale_soggiorno
+    - light.luce_scale_taverna
+    - light.luce_porta_garage
+    - light.luce_garage
 
-Luci Scale:
-  name: Luci Scale
+Luci Casa Piano Terra:
+  name: Luci Casa Piano Terra
+  all: true
+  entities:
+    - light.cespuglio_ingresso
+    - light.cespuglio_divano
+    - light.tavolo
+    - light.luce_tavolo_soggiorno
+    - light.luce_tavolo_soggiorno_hue
+    - light.luce_cucina
+    - light.cucina
+    - light.lampada_sale_camera_da_letto
+    - light.faretti_letto_camera_da_letto
+    - light.faretti_idromassaggio_camera_da_letto
+    - light.faretti_interno_cabina_camera_da_letto
+    - light.faretti_esterno_cabina_camera_da_letto
+    - light.led_letto
+    - light.led_termoarredo_camera_da_letto
+    - light.scale_soggiorno
+
+Luci Casa Primo Piano :
+  name: Luci Casa Primo Piano
   all: true
   entities:
     - light.pianerottolo_primo_piano
-    - light.scale_soggiorno
+
+Luci Casa Taverna:
+  name: Luci Casa Taverna
+  all: true
+  entities:
+    - light.luce_porta_garage
+    - light.luce_garage
+
+Luci Casa Esterno:
+  name: Luci Casa Esterno
+  all: true
+  entities:
+    - light.luce_esterno_alessandro
+    - light.luce_esterno_cancelletto
+    - light.luce_esterno_cucina
+    - light.luce_esterno_salone
+    - light.luce_esterno_taverna
+    - light.luci_cammino_ingresso
+    - light.luce_portico_ingresso
+    - light.luci_giardino_lontano
+    - light.luci_giardino_vicino
+
+#################################################################################
+#
+# Persiane
+#
+#################################################################################
+
+
+##########################################################################
+#
+# Finestre
+#
+##########################################################################
+
+Finestre Casa:
+  name: Finestre Casa
+  entities:
+    - binary_sensor.porta_finestra_cucina_contact
+    - binary_sensor.porta_finestra_soggiorno_contact
+    - binary_sensor.porta_finestra_tavolo_giardino_contact
+    - binary_sensor.finestra_alessandro_contact
+    - binary_sensor.porta_finestra_alessandro_contact
+    - binary_sensor.finestra_bagno_primo_piano_contact
+    - binary_sensor.finestra_beatrice_contact
+
+Finestre Piano Terra:
+  name: Finestre Piano Terra
+  entities:
+    - binary_sensor.porta_finestra_cucina_contact
+    - binary_sensor.porta_finestra_soggiorno_contact
+    - binary_sensor.porta_finestra_tavolo_giardino_contact
+    - binary_sensor.finestra_alessandro_contact
+
+Finestre Primo Piano:
+  name: Finestre Primo Piano
+  entities:
+    - binary_sensor.porta_finestra_alessandro_contact
+    - binary_sensor.finestra_bagno_primo_piano_contact
+    - binary_sensor.finestra_beatrice_contact
+
+##########################################################################
+#
+# Persiane
+#
+##########################################################################
+
+Persiane Casa:
+  name: Persiane Casa
+  entities:
+    - binary_sensor.persiana_porta_finestra_cucina_contact
+    - binary_sensor.persiana_porta_finestra_soggiorno_contact
+    - binary_sensor.persiana_porta_finestra_tavolo_giardino_contact
+    - binary_sensor.persiana_porta_finestra_alessandro_contact
+    - binary_sensor.persiana_finestra_alessandro_contact
+    - binary_sensor.persiana_finestra_bagno_primo_piano_contact
+    - binary_sensor.persiana_finestra_beatrice_contact
+
+Persiane Piano Terra:
+  name: Persiane Piano Terra
+  entities:
+    - binary_sensor.persiana_porta_finestra_cucina_contact
+    - binary_sensor.persiana_porta_finestra_soggiorno_contact
+    - binary_sensor.persiana_porta_finestra_tavolo_giardino_contact
+
+Persiane Primo Piano:
+  name: Persiane Primo Piano
+  entities:
+    - binary_sensor.persiana_porta_finestra_alessandro_contact
+    - binary_sensor.persiana_finestra_alessandro_contact
+    - binary_sensor.persiana_finestra_bagno_primo_piano_contact
+    - binary_sensor.persiana_finestra_beatrice_contact
 
 Previsioni Giornaliere:
   name: Previsioni Giornaliere

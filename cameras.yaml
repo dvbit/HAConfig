@@ -42,6 +42,10 @@
   username: !secret TelecameraCitofonousername
   password: !secret TelecameraCitofonodahuapass
 
+- platform: generic
+  name:  TV2
+  still_image_url: rtsp://192.168.2.2:554
+
 #- platform: generic
 #  name:  TelecameraMonitor
 #  still_image_url: !secret TelecameraMonitorstill

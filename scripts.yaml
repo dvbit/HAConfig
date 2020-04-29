@@ -128,4 +128,7 @@ accendilucicamminoingresso:
       command:
       - Mute
       device_id: 65706522
-    
+
+'check_config':
+  sequence: []
+  alias: Check Configuration
